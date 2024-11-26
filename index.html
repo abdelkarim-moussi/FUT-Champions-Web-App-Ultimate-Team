@@ -4,14 +4,24 @@
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <!-- FONT (OPTIONAL) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed:300,400,700" />
+
     <link rel="stylesheet" href="./assets/css/output.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FUT-CHAMPIONS WEB APP</title>
 </head>
 
 <body class="px-10">
-    <header class="px-5 py-2 flex justify-around items-center shadow-md rounded-md mt-5 max-w-[800px] mx-auto">
+    <header
+        class="px-5 py-2 flex justify-around items-center shadow-md shadow-[#5ce1e6] rounded-md mt-5 max-w-[800px] mx-auto text-white">
         <div class="logo w-[60px]">
             <img src="./assets/imgs/FUT.png" alt="FUT">
         </div>
@@ -21,6 +31,795 @@
             <li><a class="text-sm hover:text-[#5CE1E6]" href="#">Players</a></li>
         </ul>
     </header>
+
+    <main class="my-20 md:flex grid grid-cols-1 gap-5">
+        <section class="bg-gray-800 rounded-md shadow-md shadow-[#5ce1e6] p-10 md:w-[70%] w-[100%]">
+            <div id="field" class="w-[100%] flex flex-col items-center justify-center gap-10 rounded-md shadow-md p-10">
+
+                <!--attaque-->
+                <div class="attaque flex gap-10 justify-center">
+                    <div class="fut-player-card">
+                        <div class="player-card-top">
+                            <div class="player-master-info">
+                                <div class="player-rating">
+                                    <span id="player-rating"></span>
+                                </div>
+                                <div class="player-position">
+                                    <span id="player-position"></span>
+                                </div>
+                                <div class="player-nation">
+                                    <span id="player-nation"></span>
+                                </div>
+                                <div class="player-club">
+                                    <span id="player-club"></span>
+                                </div>
+                            </div>
+                            <div class="player-picture">
+                                <img src="https://selimdoyranli.com/cdn/fut-player-card/img/messi.png" alt="Messi"
+                                    draggable="false" />
+                                <!-- <div class="player-extra">
+                                    <span>4*SM</span>
+                                    <span>4*WF</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="player-card-bottom">
+                            <div class="player-info">
+                                <!-- Player Name-->
+                                <div class="player-name">
+                                    <span id="player-name"></span>
+                                </div>
+                                <!-- Player Features-->
+                                <div class="player-features">
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="pace"></div>
+                                            <div class="player-feature-title">PAC</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="shooting"></div>
+                                            <div class="player-feature-title">SHO</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="passing"></div>
+                                            <div class="player-feature-title">PAS</div>
+                                        </span>
+                                    </div>
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="driplling"></div>
+                                            <div class="player-feature-title">DRI</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="defending"></div>
+                                            <div class="player-feature-title">DEF</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="physical"></div>
+                                            <div class="player-feature-title">PHY</div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fut-player-card">
+                        <div class="player-card-top">
+                            <div class="player-master-info">
+                                <div class="player-rating">
+                                    <span id="player-rating"></span>
+                                </div>
+                                <div class="player-position">
+                                    <span id="player-position"></span>
+                                </div>
+                                <div class="player-nation">
+                                    <span id="player-nation"></span>
+                                </div>
+                                <div class="player-club">
+                                    <span id="player-club"></span>
+                                </div>
+                            </div>
+                            <div class="player-picture">
+                                <img src="https://selimdoyranli.com/cdn/fut-player-card/img/messi.png" alt="Messi"
+                                    draggable="false" />
+                                <!-- <div class="player-extra">
+                                    <span>4*SM</span>
+                                    <span>4*WF</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="player-card-bottom">
+                            <div class="player-info">
+                                <!-- Player Name-->
+                                <div class="player-name">
+                                    <span id="player-name"></span>
+                                </div>
+                                <!-- Player Features-->
+                                <div class="player-features">
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="pace"></div>
+                                            <div class="player-feature-title">PAC</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="shooting"></div>
+                                            <div class="player-feature-title">SHO</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="passing"></div>
+                                            <div class="player-feature-title">PAS</div>
+                                        </span>
+                                    </div>
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="driplling"></div>
+                                            <div class="player-feature-title">DRI</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="defending"></div>
+                                            <div class="player-feature-title">DEF</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="physical"></div>
+                                            <div class="player-feature-title">PHY</div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fut-player-card">
+                        <div class="player-card-top">
+                            <div class="player-master-info">
+                                <div class="player-rating">
+                                    <span id="player-rating"></span>
+                                </div>
+                                <div class="player-position">
+                                    <span id="player-position"></span>
+                                </div>
+                                <div class="player-nation">
+                                    <span id="player-nation"></span>
+                                </div>
+                                <div class="player-club">
+                                    <span id="player-club"></span>
+                                </div>
+                            </div>
+                            <div class="player-picture">
+                                <img src="" alt="player image" />
+                                <!-- <div class="player-extra">
+                                    <span>4*SM</span>
+                                    <span>4*WF</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="player-card-bottom">
+                            <div class="player-info">
+                                <!-- Player Name-->
+                                <div class="player-name">
+                                    <span id="player-name"></span>
+                                </div>
+                                <!-- Player Features-->
+                                <div class="player-features">
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="pace"></div>
+                                            <div class="player-feature-title">PAC</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="shooting"></div>
+                                            <div class="player-feature-title">SHO</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="passing"></div>
+                                            <div class="player-feature-title">PAS</div>
+                                        </span>
+                                    </div>
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="driplling"></div>
+                                            <div class="player-feature-title">DRI</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="defending"></div>
+                                            <div class="player-feature-title">DEF</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="physical"></div>
+                                            <div class="player-feature-title">PHY</div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--center-->
+                <div class="center flex gap-10 justify-center">
+                    <div class="fut-player-card">
+                        <div class="player-card-top">
+                            <div class="player-master-info">
+                                <div class="player-rating">
+                                    <span id="player-rating"></span>
+                                </div>
+                                <div class="player-position">
+                                    <span id="player-position"></span>
+                                </div>
+                                <div class="player-nation">
+                                    <span id="player-nation"></span>
+                                </div>
+                                <div class="player-club">
+                                    <span id="player-club"></span>
+                                </div>
+                            </div>
+                            <div class="player-picture">
+                                <img src="https://selimdoyranli.com/cdn/fut-player-card/img/messi.png" alt="Messi"
+                                    draggable="false" />
+                                <!-- <div class="player-extra">
+                                    <span>4*SM</span>
+                                    <span>4*WF</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="player-card-bottom">
+                            <div class="player-info">
+                                <!-- Player Name-->
+                                <div class="player-name">
+                                    <span id="player-name"></span>
+                                </div>
+                                <!-- Player Features-->
+                                <div class="player-features">
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="pace"></div>
+                                            <div class="player-feature-title">PAC</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="shooting"></div>
+                                            <div class="player-feature-title">SHO</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="passing"></div>
+                                            <div class="player-feature-title">PAS</div>
+                                        </span>
+                                    </div>
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="driplling"></div>
+                                            <div class="player-feature-title">DRI</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="defending"></div>
+                                            <div class="player-feature-title">DEF</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="physical"></div>
+                                            <div class="player-feature-title">PHY</div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fut-player-card">
+                        <div class="player-card-top">
+                            <div class="player-master-info">
+                                <div class="player-rating">
+                                    <span id="player-rating"></span>
+                                </div>
+                                <div class="player-position">
+                                    <span id="player-position"></span>
+                                </div>
+                                <div class="player-nation">
+                                    <span id="player-nation"></span>
+                                </div>
+                                <div class="player-club">
+                                    <span id="player-club"></span>
+                                </div>
+                            </div>
+                            <div class="player-picture">
+                                <img src="https://selimdoyranli.com/cdn/fut-player-card/img/messi.png" alt="Messi"
+                                    draggable="false" />
+                                <!-- <div class="player-extra">
+                                    <span>4*SM</span>
+                                    <span>4*WF</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="player-card-bottom">
+                            <div class="player-info">
+                                <!-- Player Name-->
+                                <div class="player-name">
+                                    <span id="player-name"></span>
+                                </div>
+                                <!-- Player Features-->
+                                <div class="player-features">
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="pace"></div>
+                                            <div class="player-feature-title">PAC</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="shooting"></div>
+                                            <div class="player-feature-title">SHO</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="passing"></div>
+                                            <div class="player-feature-title">PAS</div>
+                                        </span>
+                                    </div>
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="driplling"></div>
+                                            <div class="player-feature-title">DRI</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="defending"></div>
+                                            <div class="player-feature-title">DEF</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="physical"></div>
+                                            <div class="player-feature-title">PHY</div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fut-player-card">
+                        <div class="player-card-top">
+                            <div class="player-master-info">
+                                <div class="player-rating">
+                                    <span id="player-rating"></span>
+                                </div>
+                                <div class="player-position">
+                                    <span id="player-position"></span>
+                                </div>
+                                <div class="player-nation">
+                                    <span id="player-nation"></span>
+                                </div>
+                                <div class="player-club">
+                                    <span id="player-club"></span>
+                                </div>
+                            </div>
+                            <div class="player-picture">
+                                <img src="https://selimdoyranli.com/cdn/fut-player-card/img/messi.png" alt="Messi"
+                                    draggable="false" />
+                                <!-- <div class="player-extra">
+                                    <span>4*SM</span>
+                                    <span>4*WF</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="player-card-bottom">
+                            <div class="player-info">
+                                <!-- Player Name-->
+                                <div class="player-name">
+                                    <span id="player-name"></span>
+                                </div>
+                                <!-- Player Features-->
+                                <div class="player-features">
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="pace"></div>
+                                            <div class="player-feature-title">PAC</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="shooting"></div>
+                                            <div class="player-feature-title">SHO</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="passing"></div>
+                                            <div class="player-feature-title">PAS</div>
+                                        </span>
+                                    </div>
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="driplling"></div>
+                                            <div class="player-feature-title">DRI</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="defending"></div>
+                                            <div class="player-feature-title">DEF</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="physical"></div>
+                                            <div class="player-feature-title">PHY</div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--defence-->
+                <div class="deffence flex gap-10 justify-center">
+                    <div class="fut-player-card">
+                        <div class="player-card-top">
+                            <div class="player-master-info">
+                                <div class="player-rating">
+                                    <span id="player-rating"></span>
+                                </div>
+                                <div class="player-position">
+                                    <span id="player-position"></span>
+                                </div>
+                                <div class="player-nation">
+                                    <span id="player-nation"></span>
+                                </div>
+                                <div class="player-club">
+                                    <span id="player-club"></span>
+                                </div>
+                            </div>
+                            <div class="player-picture">
+                                <img src="https://selimdoyranli.com/cdn/fut-player-card/img/messi.png" alt="Messi"
+                                    draggable="false" />
+                                <!-- <div class="player-extra">
+                                    <span>4*SM</span>
+                                    <span>4*WF</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="player-card-bottom">
+                            <div class="player-info">
+                                <!-- Player Name-->
+                                <div class="player-name">
+                                    <span id="player-name"></span>
+                                </div>
+                                <!-- Player Features-->
+                                <div class="player-features">
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="pace"></div>
+                                            <div class="player-feature-title">PAC</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="shooting"></div>
+                                            <div class="player-feature-title">SHO</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="passing"></div>
+                                            <div class="player-feature-title">PAS</div>
+                                        </span>
+                                    </div>
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="driplling"></div>
+                                            <div class="player-feature-title">DRI</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="defending"></div>
+                                            <div class="player-feature-title">DEF</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="physical"></div>
+                                            <div class="player-feature-title">PHY</div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fut-player-card">
+                        <div class="player-card-top">
+                            <div class="player-master-info">
+                                <div class="player-rating">
+                                    <span id="player-rating"></span>
+                                </div>
+                                <div class="player-position">
+                                    <span id="player-position"></span>
+                                </div>
+                                <div class="player-nation">
+                                    <span id="player-nation"></span>
+                                </div>
+                                <div class="player-club">
+                                    <span id="player-club"></span>
+                                </div>
+                            </div>
+                            <div class="player-picture">
+                                <img src="https://selimdoyranli.com/cdn/fut-player-card/img/messi.png" alt="Messi"
+                                    draggable="false" />
+                                <!-- <div class="player-extra">
+                                    <span>4*SM</span>
+                                    <span>4*WF</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="player-card-bottom">
+                            <div class="player-info">
+                                <!-- Player Name-->
+                                <div class="player-name">
+                                    <span id="player-name"></span>
+                                </div>
+                                <!-- Player Features-->
+                                <div class="player-features">
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="pace"></div>
+                                            <div class="player-feature-title">PAC</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="shooting"></div>
+                                            <div class="player-feature-title">SHO</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="passing"></div>
+                                            <div class="player-feature-title">PAS</div>
+                                        </span>
+                                    </div>
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="driplling"></div>
+                                            <div class="player-feature-title">DRI</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="defending"></div>
+                                            <div class="player-feature-title">DEF</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="physical"></div>
+                                            <div class="player-feature-title">PHY</div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fut-player-card">
+                        <div class="player-card-top">
+                            <div class="player-master-info">
+                                <div class="player-rating">
+                                    <span id="player-rating"></span>
+                                </div>
+                                <div class="player-position">
+                                    <span id="player-position"></span>
+                                </div>
+                                <div class="player-nation">
+                                    <span id="player-nation"></span>
+                                </div>
+                                <div class="player-club">
+                                    <span id="player-club"></span>
+                                </div>
+                            </div>
+                            <div class="player-picture">
+                                <img src="https://selimdoyranli.com/cdn/fut-player-card/img/messi.png" alt="Messi"
+                                    draggable="false" />
+                                <!-- <div class="player-extra">
+                                    <span>4*SM</span>
+                                    <span>4*WF</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="player-card-bottom">
+                            <div class="player-info">
+                                <!-- Player Name-->
+                                <div class="player-name">
+                                    <span id="player-name"></span>
+                                </div>
+                                <!-- Player Features-->
+                                <div class="player-features">
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="pace"></div>
+                                            <div class="player-feature-title">PAC</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="shooting"></div>
+                                            <div class="player-feature-title">SHO</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="passing"></div>
+                                            <div class="player-feature-title">PAS</div>
+                                        </span>
+                                    </div>
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="driplling"></div>
+                                            <div class="player-feature-title">DRI</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="defending"></div>
+                                            <div class="player-feature-title">DEF</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="physical"></div>
+                                            <div class="player-feature-title">PHY</div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fut-player-card">
+                        <div class="player-card-top">
+                            <div class="player-master-info">
+                                <div class="player-rating">
+                                    <span id="player-rating"></span>
+                                </div>
+                                <div class="player-position">
+                                    <span id="player-position"></span>
+                                </div>
+                                <div class="player-nation">
+                                    <span id="player-nation"></span>
+                                </div>
+                                <div class="player-club">
+                                    <span id="player-club"></span>
+                                </div>
+                            </div>
+                            <div class="player-picture">
+                                <img src="https://selimdoyranli.com/cdn/fut-player-card/img/messi.png" alt="Messi"
+                                    draggable="false" />
+                                <!-- <div class="player-extra">
+                                    <span>4*SM</span>
+                                    <span>4*WF</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="player-card-bottom">
+                            <div class="player-info">
+                                <!-- Player Name-->
+                                <div class="player-name">
+                                    <span id="player-name"></span>
+                                </div>
+                                <!-- Player Features-->
+                                <div class="player-features">
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="pace"></div>
+                                            <div class="player-feature-title">PAC</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="shooting"></div>
+                                            <div class="player-feature-title">SHO</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="passing"></div>
+                                            <div class="player-feature-title">PAS</div>
+                                        </span>
+                                    </div>
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="driplling"></div>
+                                            <div class="player-feature-title">DRI</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="defending"></div>
+                                            <div class="player-feature-title">DEF</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="physical"></div>
+                                            <div class="player-feature-title">PHY</div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--gol keaper-->
+                <div class="gol-keaper flex justify-center">
+                    <div class="fut-player-card">
+                        <div class="player-card-top">
+                            <div class="player-master-info">
+                                <div class="player-rating">
+                                    <span id="player-rating"></span>
+                                </div>
+                                <div class="player-position">
+                                    <span id="player-position"></span>
+                                </div>
+                                <div class="player-nation">
+                                    <span id="player-nation"></span>
+                                </div>
+                                <div class="player-club">
+                                    <span id="player-club"></span>
+                                </div>
+                            </div>
+                            <div class="player-picture">
+                                <img src="https://selimdoyranli.com/cdn/fut-player-card/img/messi.png" alt="Messi"
+                                    draggable="false" />
+                                <!-- <div class="player-extra">
+                                    <span>4*SM</span>
+                                    <span>4*WF</span>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="player-card-bottom">
+                            <div class="player-info">
+                                <!-- Player Name-->
+                                <div class="player-name">
+                                    <span id="player-name"></span>
+                                </div>
+                                <!-- Player Features-->
+                                <div class="player-features">
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="pace"></div>
+                                            <div class="player-feature-title">PAC</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="shooting"></div>
+                                            <div class="player-feature-title">SHO</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="passing"></div>
+                                            <div class="player-feature-title">PAS</div>
+                                        </span>
+                                    </div>
+                                    <div class="player-features-col">
+                                        <span>
+                                            <div class="player-feature-value" id="driplling"></div>
+                                            <div class="player-feature-title">DRI</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="defending"></div>
+                                            <div class="player-feature-title">DEF</div>
+                                        </span>
+                                        <span>
+                                            <div class="player-feature-value" id="physical"></div>
+                                            <div class="player-feature-title">PHY</div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </section>
+
+        <!--side bar-->
+        <section id="side-bar" class="md:w-[30%] w-[100%] p-10 bg-gray-800 rounded-md shadow-md shadow-[#5ce1e6]">
+            <h2 class="text-lg font-bold mb-2 text-white">Create Squad</h2>
+            <input class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 w-[100%] h-[30px]" type="text"
+                placeholder="Squad name">
+            <div class="w-[100%] h-[2px] bg-slate-200 my-3"></div>
+            <h2 class="text-lg font-bold text-white mb-3">Add Player</h2>
+            <form action="/" class="grid grid-cols-2 md:grid-cols-1 gap-2">
+                <input class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                    type="text" placeholder="Player name">
+                <label for="player-image"
+                    class="rounded-md shadow-sm px-2 bg-gray-700 text-gray-400 text-sm h-[30px] mb-2 cursor-pointer flex items-center">player
+                    image</label>
+                <input class="hidden" id="player-image" type="file">
+                <select
+                    class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2 text-gray-400 cursor-pointer"
+                    name="player-position" id="paler-position">
+                    <option value="none" selected>select option</option>
+                    <option value="gk">GK</option>
+                    <option value="cb">CB</option>
+                    <option value="lb">LB</option>
+                    <option value="cb">CB</option>
+                    <option value="cm">CM</option>
+                    <option value="rw">RW</option>
+                    <option value="st">ST</option>
+                    <option value="lw">LW</option>
+                </select>
+                <input class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                    type="text" placeholder="Player nationality">
+                <input class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                    type="text" placeholder="Player club">
+                <input class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                    type="number" placeholder="rating">
+                <input class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                    type="number" placeholder="pace">
+                <input class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                    type="number" placeholder="shooting">
+                <input class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                    type="number" placeholder="passing">
+                <input class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                    type="number" placeholder="driplling">
+                <input class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                    type="number" placeholder="defending">
+                <input class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px]"
+                    type="number" placeholder="physical">
+            </form>
+        </section>
+    </main>
 </body>
 
 </html>
