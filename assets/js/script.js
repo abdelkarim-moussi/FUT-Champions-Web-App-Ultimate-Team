@@ -4,6 +4,8 @@ const closeModalBtn = document.getElementById("close-btn");
 const addPlayerForm = document.getElementById("add-player-form");
 const addPlayerBtn = document.getElementById("add-player-btn");
 const sideBar = document.getElementById("side-bar");
+let error = document.querySelector(".error-message");
+// console.log("error", error.innerHTML);
 //form inputs
 let playerName = document.getElementById("f-name");
 let playerImage = document.getElementById("f-image");
@@ -17,12 +19,12 @@ let playerPassing = document.getElementById("f-passing");
 let playerDriblling = document.getElementById("f-driblling");
 let playerDefending = document.getElementById("f-defending");
 let playerPhysical = document.getElementById("f-physical");
-
 //player card informations variables declaration
 let rating = document.getElementById("player-rating");
 //close modal
 function hideModal() {
   modal.classList.add("hidden");
+  addPlayerForm.reset();
 }
 closeModalBtn.addEventListener("click", hideModal);
 
@@ -39,11 +41,12 @@ function showErrorMessage(element, message) {
   displayError.innerHTML = message;
 }
 let validateForm = () => {
-  console.log("name", playerName.value);
-  if (playerName.value === "" || playerName.value.length > 10) {
+  if (playerName.value === "" || playerName.value.length > 20) {
     showErrorMessage(playerName, "Enter a valid name");
   } else if (playerImage.value === "") {
     showErrorMessage(playerImage, "you have to upload an image");
+  } else if (playerPosition.value === "none") {
+    showErrorMessage(playerPosition, "you have to choose a valid position");
   } else if (
     playerNationality.value === "" ||
     playerNationality.value.length > 10
@@ -51,19 +54,19 @@ let validateForm = () => {
     showErrorMessage(playerNationality, "Enter a valid nation");
   } else if (playerClub.value === "" || playerClub.value.length > 4) {
     showErrorMessage(playerClub, "the club must contain 4 letters maximum");
-  } else if (playerRating.value === "") {
+  } else if (playerRating.value === "" || playerRating.value <= 0) {
     showErrorMessage(playerRating, "invalid rating number");
-  } else if (playerPace.value === "") {
+  } else if (playerPace.value === "" || playerPace.value <= 0) {
     showErrorMessage(playerPace, "invalid pace number");
-  } else if (playerShooting.value === "") {
+  } else if (playerShooting.value === "" || playerShooting.value <= 0) {
     showErrorMessage(playerShooting, "invalid shooting number");
-  } else if (playerPassing.value === "") {
+  } else if (playerPassing.value === "" || playerPassing.value <= 0) {
     showErrorMessage(playerPassing, "invalid passing number");
-  } else if (playerDriblling.value === "") {
+  } else if (playerDriblling.value === "" || playerDriblling.value <= 0) {
     showErrorMessage(playerDriblling, "invalid dribling number");
-  } else if (playerDefending.value === "") {
+  } else if (playerDefending.value === "" || playerDefending.value <= 0) {
     showErrorMessage(playerDefending, "invalid defendig number");
-  } else if (playerPhysical.value === "") {
+  } else if (playerPhysical.value === "" || playerPhysical.value <= 0) {
     showErrorMessage(playerPhysical, "invalid physical number");
   } else {
     rating.innerHTML = playerRating.value;
@@ -79,14 +82,20 @@ let validateForm = () => {
     // playerDriblling.value = "";
     // playerDefending.value = "";
     // playerPhysical.value = "";
+
     addPlayerForm.reset();
     hideModal();
+
+    error.innerHTML = "";
+    console.log("rating", playerRating.value);
   }
 };
 
+//function to display cards
+
 playerCard.forEach((card) => {
   card.addEventListener("click", () => {
-    modal.classList.remove("hidden");
+    displayPlayers();
   });
 });
 
@@ -102,10 +111,11 @@ const playersArray = JSON.parse(localStorage.getItem("players"));
 const rw = playersArray.filter((player) => player.position === "RW");
 console.log("rw", rw);
 
-playersArray.map((player) => {
-  if (player.position != "GK") {
-    sideBar.innerHTML += `
-    <div class="fut-player-card cursor-pointer">
+function displayPlayers() {
+  playersArray.map((player, playerId) => {
+    if (player.position != "GK") {
+      sideBar.innerHTML += `
+    <div class="fut-player-card cursor-pointer" id="player-card${playerId}" >
       <div class="player-card-top">
         <div class="player-master-info">
           <div class="player-rating">
@@ -162,9 +172,9 @@ playersArray.map((player) => {
         </div>
       </div>
     </div>`;
-  } else {
-    sideBar.innerHTML += `
-    <div class="fut-player-card cursor-pointer">
+    } else {
+      sideBar.innerHTML += `
+    <div class="fut-player-card cursor-pointer" id="player-card${playerId}">
       <div class="player-card-top">
         <div class="player-master-info">
           <div class="player-rating">
@@ -221,5 +231,14 @@ playersArray.map((player) => {
         </div>
       </div>
     </div>`;
-  }
-});
+    }
+  });
+}
+
+function addPlayer(player) {
+  playersArray.forEach((player) => {
+    player.addEventListener("click", () => {
+      displayPlayers();
+    });
+  });
+}
