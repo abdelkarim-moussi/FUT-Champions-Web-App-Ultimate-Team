@@ -1,3 +1,5 @@
+// import data from "players.json/players" assert { type: "json" };
+// console.log("data", data);
 const playerCard = document.querySelectorAll(".fut-player-card");
 const modal = document.getElementById("add-player-modal");
 const closeModalBtn = document.getElementById("close-btn");
@@ -19,13 +21,7 @@ let playerDefending = document.getElementById("f-defending");
 let playerPhysical = document.getElementById("f-physical");
 
 //player card informations variables declaration
-
 let rating = document.getElementById("player-rating");
-
-console.log(rating);
-console.log("p-name", playerName.value);
-console.log("rating", playerRating.value);
-console.log("pace", playerPace);
 //close modal
 function hideModal() {
   modal.classList.add("hidden");
@@ -95,3 +91,12 @@ playerCard.forEach((card) => {
     modal.classList.remove("hidden");
   });
 });
+
+fetch("../../players.json")
+  .then((respense) => {
+    respense.json();
+  })
+  .then((data) => {
+    console.log("done");
+    console.log(data);
+  });
