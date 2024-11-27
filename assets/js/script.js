@@ -1,11 +1,9 @@
-// import data from "players.json/players" assert { type: "json" };
-// console.log("data", data);
 const playerCard = document.querySelectorAll(".fut-player-card");
 const modal = document.getElementById("add-player-modal");
 const closeModalBtn = document.getElementById("close-btn");
 const addPlayerForm = document.getElementById("add-player-form");
 const addPlayerBtn = document.getElementById("add-player-btn");
-
+const sideBar = document.getElementById("side-bar");
 //form inputs
 let playerName = document.getElementById("f-name");
 let playerImage = document.getElementById("f-image");
@@ -92,11 +90,136 @@ playerCard.forEach((card) => {
   });
 });
 
+//players array
 fetch("../../players.json")
-  .then((respense) => {
-    respense.json();
-  })
+  .then((respense) => respense.json())
   .then((data) => {
-    console.log("done");
-    console.log(data);
+    localStorage.setItem(`players`, JSON.stringify(data.players));
   });
+
+const playersArray = JSON.parse(localStorage.getItem("players"));
+
+const rw = playersArray.filter((player) => player.position === "RW");
+console.log("rw", rw);
+
+playersArray.map((player) => {
+  if (player.position != "GK") {
+    sideBar.innerHTML += `
+    <div class="fut-player-card cursor-pointer">
+      <div class="player-card-top">
+        <div class="player-master-info">
+          <div class="player-rating">
+            <span id="player-rating">${player.rating}</span>
+          </div>
+          <div class="player-position">
+            <span id="player-position">${player.position}</span>
+          </div>
+          <div class="player-nation">
+            <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
+          </div>
+          <div class="player-club">
+            <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
+          </div>
+        </div>
+        <div class="player-picture">
+        <img src="${player.photo}" alt="player image"></div>
+      </div>
+      <div class="player-card-bottom">
+        <div class="player-info">
+          <div class="player-name ml-2">
+            <span id="player-name">${player.name}</span>
+          </div>
+          <div class="player-features">
+            <div class="player-features-col">
+              <span>
+                <div class="player-feature-value" id="pace">${player.pace}</div>
+                <div class="player-feature-title">PAC</div>
+              </span>
+              <span>
+                <div class="player-feature-value" id="shooting">${player.shooting}</div>
+                <div class="player-feature-title">SHO</div>
+              </span>
+              <span>
+                <div class="player-feature-value" id="passing">${player.passing}</div>
+                <div class="player-feature-title">PAS</div>
+              </span>
+            </div>
+            <div class="player-features-col">
+              <span>
+                <div class="player-feature-value" id="dribblling">${player.dribbling}</div>
+                <div class="player-feature-title">DRI</div>
+              </span>
+              <span>
+                <div class="player-feature-value" id="defending">${player.defending}</div>
+                <div class="player-feature-title">DEF</div>
+              </span>
+              <span>
+                <div class="player-feature-value" id="physical">${player.physical}</div>
+                <div class="player-feature-title">PHY</div>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  } else {
+    sideBar.innerHTML += `
+    <div class="fut-player-card cursor-pointer">
+      <div class="player-card-top">
+        <div class="player-master-info">
+          <div class="player-rating">
+            <span id="player-rating">${player.rating}</span>
+          </div>
+          <div class="player-position">
+            <span id="player-position">${player.position}</span>
+          </div>
+          <div class="player-nation">
+            <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
+          </div>
+          <div class="player-club">
+            <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
+          </div>
+        </div>
+        <div class="player-picture">
+        <img src="${player.photo}" alt="player image"></div>
+      </div>
+      <div class="player-card-bottom">
+        <div class="player-info">
+          <div class="player-name ml-2">
+            <span id="player-name">${player.name}</span>
+          </div>
+          <div class="player-features">
+            <div class="player-features-col">
+              <span>
+                <div class="player-feature-value" id="diving">${player.diving}</div>
+                <div class="player-feature-title">DIV</div>
+              </span>
+              <span>
+                <div class="player-feature-value" id="handling">${player.handling}</div>
+                <div class="player-feature-title">HAN</div>
+              </span>
+              <span>
+                <div class="player-feature-value" id="passing">${player.kicking}</div>
+                <div class="player-feature-title">KIC</div>
+              </span>
+            </div>
+            <div class="player-features-col">
+              <span>
+                <div class="player-feature-value" id="dribblling">${player.reflexes}</div>
+                <div class="player-feature-title">REF</div>
+              </span>
+              <span>
+                <div class="player-feature-value" id="defending">${player.speed}</div>
+                <div class="player-feature-title">SPE</div>
+              </span>
+              <span>
+                <div class="player-feature-value" id="physical">${player.positioning}</div>
+                <div class="player-feature-title">POS</div>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+});
