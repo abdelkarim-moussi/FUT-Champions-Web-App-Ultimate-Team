@@ -20,7 +20,7 @@ body {
 }
 
 #field {
-  background-image: url("../imgs/field.png");
+  background-image: url("https://www.futbin.com/design2/img/static/field-bg.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -30,7 +30,7 @@ body {
   position: relative;
   width: 140px;
   height: 200px;
-  background-image: url(https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png);
+  background-image: url("../imgs/card2.png");
   background-position: center center;
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -40,6 +40,10 @@ body {
   -o-transition: 200ms ease-in;
   transition: 200ms ease-in;
 }
+
+/* .fut-player-card:hover {
+  box-shadow: 2px 5px 5px var(--primary-color);
+} */
 
 .fut-player-card .player-card-top {
   position: relative;
