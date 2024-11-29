@@ -5,7 +5,9 @@ const addPlayerForm = document.getElementById("add-player-form");
 const addPlayerBtn = document.getElementById("add-player-btn");
 const sideBar = document.getElementById("side-bar");
 const field = document.getElementById("field");
+const addPlayerButton = document.getElementById("add-player-button");
 let error = document.querySelector(".error-message");
+
 // console.log("error", error.innerHTML);
 //form inputs
 let playerName = document.getElementById("f-name");
@@ -20,14 +22,17 @@ let playerPassing = document.getElementById("f-passing");
 let playerDriblling = document.getElementById("f-driblling");
 let playerDefending = document.getElementById("f-defending");
 let playerPhysical = document.getElementById("f-physical");
-//player card informations variables declaration
-let rating = document.getElementById("player-rating");
+
 //close modal
 function hideModal() {
   modal.classList.add("hidden");
   addPlayerForm.reset();
 }
 closeModalBtn.addEventListener("click", hideModal);
+
+addPlayerButton.addEventListener("click", () => {
+  modal.classList.remove("hidden");
+});
 
 //players array
 fetch("../../players.json")
@@ -36,7 +41,7 @@ fetch("../../players.json")
     localStorage.setItem(`players`, JSON.stringify(data.players));
   });
 
-const playersArray = JSON.parse(localStorage.getItem("players"));
+let playersArray = JSON.parse(localStorage.getItem("players"));
 
 //stop the default behavior of the form on submit by using preventdefault method
 addPlayerForm.addEventListener("submit", (event) => {
@@ -57,13 +62,10 @@ let validateForm = () => {
     showErrorMessage(playerImage, "you have to upload an image");
   } else if (playerPosition.value === "none") {
     showErrorMessage(playerPosition, "you have to choose a valid position");
-  } else if (
-    playerNationality.value === "" ||
-    playerNationality.value.length > 10
-  ) {
-    showErrorMessage(playerNationality, "Enter a valid nation");
-  } else if (playerClub.value === "" || playerClub.value.length > 4) {
-    showErrorMessage(playerClub, "the club must contain 4 letters maximum");
+  } else if (playerNationality.value === "") {
+    showErrorMessage(playerNationality, "upload the nationality flag");
+  } else if (playerClub.value === "") {
+    showErrorMessage(playerClub, "upload the club log");
   } else if (playerRating.value === "" || playerRating.value <= 0) {
     showErrorMessage(playerRating, "invalid rating number");
   } else if (playerPace.value === "" || playerPace.value <= 0) {
@@ -79,58 +81,49 @@ let validateForm = () => {
   } else if (playerPhysical.value === "" || playerPhysical.value <= 0) {
     showErrorMessage(playerPhysical, "invalid physical number");
   } else {
-    rating.innerHTML = playerRating.value;
-    // playerName.value = "";
-    // playerImage.value = "";
-    // playerPosition.value = "";
-    // playerNationality.value = "";
-    // playerClub.value = "";
-    // playerRating.value = "";
-    // playerPace.value = "";
-    // playerShooting.value = "";
-    // playerPassing.value = "";
-    // playerDriblling.value = "";
-    // playerDefending.value = "";
-    // playerPhysical.value = "";
-
     addPlayerForm.reset();
     hideModal();
-
-    error.innerHTML = "";
-    console.log("rating", playerRating.value);
   }
 };
 
 //display players
 
+function adapteForm() {
+  if (playerPosition.value === "gk") {
+    playerPace.setAttribute("placeholder", "dividing");
+    playerDriblling.setAttribute("placeholder", "handling");
+    playerShooting.setAttribute("placeholder", "kicking");
+    playerDefending.setAttribute("placeholder", "reflexes");
+    playerPassing.setAttribute("placeholder", "speed");
+    playerPhysical.setAttribute("placeholder", "positioning");
+  } else {
+    playerPace.setAttribute("placeholder", "pace");
+    playerDriblling.setAttribute("placeholder", "driblling");
+    playerShooting.setAttribute("placeholder", "shooting");
+    playerDefending.setAttribute("placeholder", "defencing");
+    playerPassing.setAttribute("placeholder", "passing");
+    playerPhysical.setAttribute("placeholder", "physical");
+  }
+  console.log(playerPosition.value);
+}
+adapteForm();
+
+// playerPosition.setAttribute("onSelect", "adapteForm(");
 //create card object function
-function createPlayer(
-  name,
-  image,
-  position,
-  nat,
-  club,
-  rating,
-  pace,
-  dribbling,
-  shooting,
-  defencing,
-  passing,
-  physical
-) {
+function createPlayer() {
   const player = {
-    name: name,
-    image: image,
-    rating: rating,
-    position: position,
-    nationality: nat,
-    club: club,
-    pace: pace,
-    driblling: dribbling,
-    shooting: shooting,
-    defencing: defencing,
-    passing: passing,
-    physical: physical,
+    name: playerName.value,
+    image: playerImage.value,
+    rating: playerRating.value,
+    position: playerPosition.value,
+    nationality: playerNationality.value,
+    club: playerClub.value,
+    pace: playerPace.value,
+    driblling: playerDriblling,
+    shooting: playerShooting,
+    defencing: playerDefending,
+    passing: playerPassing,
+    physical: playerPhysical,
   };
   rating.innerHTML = player.rating;
   console.log("rating", rating);
@@ -207,6 +200,7 @@ function displayPlayers(playersArray) {
       );
     } else {
       player_Card.innerHTML = `
+    
     <div class="player-card-top">
         <div class="player-master-info">
           <div class="player-rating">
@@ -272,165 +266,282 @@ function displayPlayers(playersArray) {
   });
 }
 
-// function addPlayerToPosition(player, positionId) {
-//   const positionElement = document.getElementById(positionId);
-
-//   // Check if the position is already filled
-//   // if (positionElement.children.length > 0) {
-//   //   alert("This position is already filled!");
-//   //   return;
-//   // }
-
-//   // Create a new card for the player
-//   const playerCard1 = document.createElement("div");
-//   playerCard1.className = "fut-player-card cursor-pointer";
-//   playerCard1.innerHTML = `
-//     <div class="player-card-top">
-//         <div class="player-master-info">
-//           <div class="player-rating">
-//             <span id="player-rating">${player.rating}</span>
-//           </div>
-//           <div class="player-position">
-//             <span id="player-position">${player.position}</span>
-//           </div>
-//           <div class="player-nation">
-//             <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
-//           </div>
-//           <div class="player-club">
-//             <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
-//           </div>
-//         </div>
-//         <div class="player-picture">
-//         <img src="${player.photo}" alt="player image"></div>
-//       </div>
-//       <div class="player-card-bottom">
-//         <div class="player-info">
-//           <div class="player-name ml-2">
-//             <span id="player-name">${player.name}</span>
-//           </div>
-//           <div class="player-features">
-//             <div class="player-features-col">
-//               <span>
-//                 <div class="player-feature-value" id="diving">${player.diving}</div>
-//                 <div class="player-feature-title">DIV</div>
-//               </span>
-//               <span>
-//                 <div class="player-feature-value" id="handling">${player.handling}</div>
-//                 <div class="player-feature-title">HAN</div>
-//               </span>
-//               <span>
-//                 <div class="player-feature-value" id="passing">${player.kicking}</div>
-//                 <div class="player-feature-title">KIC</div>
-//               </span>
-//             </div>
-//             <div class="player-features-col">
-//               <span>
-//                 <div class="player-feature-value" id="dribblling">${player.reflexes}</div>
-//                 <div class="player-feature-title">REF</div>
-//               </span>
-//               <span>
-//                 <div class="player-feature-value" id="defending">${player.speed}</div>
-//                 <div class="player-feature-title">SPE</div>
-//               </span>
-//               <span>
-//                 <div class="player-feature-value" id="physical">${player.positioning}</div>
-//                 <div class="player-feature-title">POS</div>
-//               </span>
-//             </div>
-//           </div>
-//         </div>
-//       </div>`;
-//   // Append the player card to the specified position
-//   positionElement.appendChild(playerCard1);
-// }
-
-// function addPlayer(player) {
-//   playersArray.forEach((player) => {
-//     player.addEventListener("click", () => {
-//       displayPlayers();
-//     });
-//   });
-// }
-
 function add_Player(pos) {
   let lwPLayers = playersArray.filter((player) => {
     return player.position === pos;
   });
-
+  switch (pos) {
+    case "LW":
+      addPlayerToPosition(lwPLayers);
+      break;
+    case "ST":
+      addPlayerToPosition(lwPLayers);
+      break;
+    case "RW":
+      addPlayerToPosition(lwPLayers);
+      break;
+    case "CM":
+      addPlayerToPosition(lwPLayers);
+      break;
+    case "LB":
+      addPlayerToPosition(lwPLayers);
+      break;
+    case "CB":
+      addPlayerToPosition(lwPLayers);
+      break;
+    case "RB":
+      addPlayerToPosition(lwPLayers);
+      break;
+    case "GK":
+      addPlayerToPosition(lwPLayers);
+      break;
+  }
   console.log(lwPLayers);
-  addPlayerToPosition(lwPLayers);
 }
 
-function addPlayerToPosition(arr) {
+function addPlayerToPosition(players) {
   sideBar.innerHTML = "";
-  arr.map((player, playerId) => {
+  players.map((player) => {
     let playerCard1 = document.createElement("div");
-    playerCard1.setAttribute("onclick", "addPlayerToF(this)");
+    playerCard1.setAttribute("onclick", "addPlayerToField(this,this.id)");
     playerCard1.className = "fut-player-card cursor-pointer";
-    playerCard1.id = playerId;
-    playerCard1.innerHTML = `
-    <div class="player-card-top">f
-         <div class="player-master-info">
-           <div class="player-rating">
-             <span id="player-rating">${player.rating}</span>
-           </div>
-           <div class="player-position">
-             <span id="player-position">${player.position}</span>
-           </div>
-           <div class="player-nation">
-             <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
-           </div>
-           <div class="player-club">
-             <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
-           </div>
-         </div>
-         <div class="player-picture">
-         <img src="${player.photo}" alt="player image"></div>
-       </div>
-       <div class="player-card-bottom">
-         <div class="player-info">
-           <div class="player-name ml-2">
-             <span id="player-name">${player.name}</span>
-           </div>
-           <div class="player-features">
-             <div class="player-features-col">
-               <span>
-                 <div class="player-feature-value" id="pace">${player.pace}</div>
-                 <div class="player-feature-title">PAC</div>
-               </span>
-               <span>
-                 <div class="player-feature-value" id="shooting">${player.shooting}</div>
-                 <div class="player-feature-title">SHO</div>
-               </span>
-               <span>
-                 <div class="player-feature-value" id="passing">${player.passing}</div>
-                 <div class="player-feature-title">PAS</div>
-               </span>
+    playerCard1.id = player.id;
+
+    if (player.position != "GK") {
+      playerCard1.innerHTML = `
+      <div class="player-card-top">
+          <div class="absolute top-5 right-1 z-10 flex flex-col items-center gap-2">
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full w-[20px] h-[20px]  p-2" onclick="removePlayer(this)"><i class="fa fa-trash"></i></button>
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full w-[20px] h-[20px]  p-2" onclick="editPlayer(this)"><i class="fa-solid fa-pen-to-square"></i></button>
+          </div>
+           <div class="player-master-info">
+             <div class="player-rating">
+               <span id="player-rating">${player.rating}</span>
              </div>
-             <div class="player-features-col">
-               <span>
-                 <div class="player-feature-value" id="dribblling">${player.dribbling}</div>
-                 <div class="player-feature-title">DRI</div>
-               </span>
-               <span>
-                 <div class="player-feature-value" id="defending">${player.defending}</div>
-                 <div class="player-feature-title">DEF</div>
-               </span>
-               <span>
-                 <div class="player-feature-value" id="physical">${player.physical}</div>
-                 <div class="player-feature-title">PHY</div>
-               </span>
+             <div class="player-position">
+               <span id="player-position">${player.position}</span>
+             </div>
+             <div class="player-nation">
+               <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
+             </div>
+             <div class="player-club">
+               <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
              </div>
            </div>
+           <div class="player-picture">
+           <img src="${player.photo}" alt="player image"></div>
          </div>
-       </div>
-   `;
+         <div class="player-card-bottom">
+           <div class="player-info">
+             <div class="player-name ml-2">
+               <span id="player-name">${player.name}</span>
+             </div>
+             <div class="player-features">
+               <div class="player-features-col">
+                 <span>
+                   <div class="player-feature-value" id="pace">${player.pace}</div>
+                   <div class="player-feature-title">PAC</div>
+                 </span>
+                 <span>
+                   <div class="player-feature-value" id="shooting">${player.shooting}</div>
+                   <div class="player-feature-title">SHO</div>
+                 </span>
+                 <span>
+                   <div class="player-feature-value" id="passing">${player.passing}</div>
+                   <div class="player-feature-title">PAS</div>
+                 </span>
+               </div>
+               <div class="player-features-col">
+                 <span>
+                   <div class="player-feature-value" id="dribblling">${player.dribbling}</div>
+                   <div class="player-feature-title">DRI</div>
+                 </span>
+                 <span>
+                   <div class="player-feature-value" id="defending">${player.defending}</div>
+                   <div class="player-feature-title">DEF</div>
+                 </span>
+                 <span>
+                   <div class="player-feature-value" id="physical">${player.physical}</div>
+                   <div class="player-feature-title">PHY</div>
+                 </span>
+               </div>
+             </div>
+           </div>
+         </div>
+     `;
+    } else {
+      playerCard1.innerHTML = `
+    <div class="player-card-top">
+        <div class="absolute top-5 right-1 z-10 flex flex-col items-center gap-2">
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full w-[20px] h-[20px]  p-2" onclick="removePlayer(this)"><i class="fa fa-trash"></i></button>
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full w-[20px] h-[20px]  p-2" onclick="editPlayer(this)"><i class="fa-solid fa-pen-to-square"></i></button>
+          </div>
+        <div class="player-master-info">
+          <div class="player-rating">
+            <span id="player-rating">${player.rating}</span>
+          </div>
+          <div class="player-position">
+            <span id="player-position">${player.position}</span>
+          </div>
+          <div class="player-nation">
+            <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
+          </div>
+          <div class="player-club">
+            <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
+          </div>
+        </div>
+        <div class="player-picture">
+        <img src="${player.photo}" alt="player image"></div>
+      </div>
+      <div class="player-card-bottom">
+        <div class="player-info">
+          <div class="player-name ml-2">
+            <span id="player-name">${player.name}</span>
+          </div>
+          <div class="player-features">
+            <div class="player-features-col">
+              <span>
+                <div class="player-feature-value" id="diving">${player.diving}</div>
+                <div class="player-feature-title">DIV</div>
+              </span>
+              <span>
+                <div class="player-feature-value" id="handling">${player.handling}</div>
+                <div class="player-feature-title">HAN</div>
+              </span>
+              <span>
+                <div class="player-feature-value" id="passing">${player.kicking}</div>
+                <div class="player-feature-title">KIC</div>
+              </span>
+            </div>
+            <div class="player-features-col">
+              <span>
+                <div class="player-feature-value" id="dribblling">${player.reflexes}</div>
+                <div class="player-feature-title">REF</div>
+              </span>
+              <span>
+                <div class="player-feature-value" id="defending">${player.speed}</div>
+                <div class="player-feature-title">SPE</div>
+              </span>
+              <span>
+                <div class="player-feature-value" id="physical">${player.positioning}</div>
+                <div class="player-feature-title">POS</div>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }
     sideBar.appendChild(playerCard1);
   });
 }
 
-function addPlayerToF(div) {
-  document.getElementById("player-lw").innerHTML = div.innerHTML;
+function addPlayerToField(div, cardId) {
+  const Index = playersArray.findIndex((player) => player.id == cardId);
+  let player = playersArray[Index];
+  console.log(player);
+  // console.log(player.id);
+  // if (cardId === player.id) {
+  // console.log("pId", player.id);
+  switch (player.position) {
+    case "LW":
+      if (document.getElementById("player-lw").children.length == 0) {
+        document.getElementById("player-lw").innerHTML = div.innerHTML;
+
+        div.remove();
+        playersArray.splice(Index, 1);
+      }
+      break;
+    case "ST":
+      if (document.getElementById("player-st").children.length == 0) {
+        document.getElementById("player-st").innerHTML = div.innerHTML;
+
+        div.remove();
+        playersArray.splice(Index, 1);
+      }
+
+      break;
+    case "RW":
+      if (document.getElementById("player-rw").children.length == 0) {
+        document.getElementById("player-rw").innerHTML = div.innerHTML;
+        div.remove();
+        playersArray.splice(Index, 1);
+      }
+      break;
+    case "CM":
+      if (document.getElementById("player-cm-g").children.length == 0) {
+        document.getElementById("player-cm-g").innerHTML = div.innerHTML;
+      } else if (document.getElementById("player-cm-c").children.length == 0) {
+        document.getElementById("player-cm-c").innerHTML = div.innerHTML;
+      } else if (document.getElementById("player-cm-d").children.length == 0) {
+        document.getElementById("player-cm-d").innerHTML = div.innerHTML;
+      }
+      div.remove();
+      playersArray.splice(Index, 1);
+
+      break;
+    case "LB":
+      if (document.getElementById("player-lb").children.length == 0) {
+        document.getElementById("player-lb").innerHTML = div.innerHTML;
+
+        div.remove();
+        playersArray.splice(Index, 1);
+      }
+      break;
+    case "CB":
+      if (document.getElementById("player-cb-g").children.length == 0) {
+        document.getElementById("player-cb-g").innerHTML = div.innerHTML;
+      } else if (document.getElementById("player-cb-d").children.length == 0) {
+        document.getElementById("player-cb-d").innerHTML = div.innerHTML;
+      }
+      div.remove();
+      playersArray.splice(Index, 1);
+
+      break;
+    case "RB":
+      if (document.getElementById("player-rb").children.length == 0) {
+        document.getElementById("player-rb").innerHTML = div.innerHTML;
+
+        div.remove();
+        playersArray.splice(Index, 1);
+      }
+      break;
+    case "GK":
+      if (document.getElementById("player-gk").children.length == 0) {
+        document.getElementById("player-gk").innerHTML = div.innerHTML;
+
+        div.remove();
+        playersArray.splice(Index, 1);
+      }
+      break;
+  }
+  // }
+}
+
+//delete player function
+function removePlayer(element) {
+  element.parentElement.parentElement.parentElement.innerHTML = "";
+}
+
+function editPlayer(element) {
+  console.log(element);
+  addPlayerForm.classList.remove("hidden");
+  // playersArray.map((player) => {
+  //   let id = element.parentElement.parentElement.parentElement.id;
+  //   if (id === player.id) {
+  //     console.log(id);
+  //     playerName.value = player.name;
+  //     playerNationality.value = player.flag;
+  //     playerClub.value = player.logo;
+  //     playerPosition.value = player.position;
+  //     playerRating.value = player.rating;
+  //     playerPace.value = player.pace;
+  //     playerShooting.value = player.shooting;
+  //     playerPassing.value = player.passing;
+  //     playerDriblling.value = player.driblling;
+  //     playerDefending.value = player.defending;
+  //     playerPhysical.value = player.physical;
+  //   }
+  // });
 }
 
 // playerCard.forEach((card) => {
