@@ -129,142 +129,142 @@ function createPlayer() {
   console.log("rating", rating);
 }
 
-function displayPlayers(playersArray) {
-  sideBar.innerHTML = "";
-  playersArray.map((player, playerId) => {
-    const player_Card = document.createElement("div");
-    player_Card.className = "fut-player-card cursor-pointer";
-    player_Card.id = `player-card${playerId}`;
-    if (player.position != "GK") {
-      player_Card.innerHTML = `
-   <div class="player-card-top">
-        <div class="player-master-info">
-          <div class="player-rating">
-            <span id="player-rating">${player.rating}</span>
-          </div>
-          <div class="player-position">
-            <span id="player-position">${player.position}</span>
-          </div>
-          <div class="player-nation">
-            <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
-          </div>
-          <div class="player-club">
-            <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
-          </div>
-        </div>
-        <div class="player-picture">
-        <img src="${player.photo}" alt="player image"></div>
-      </div>
-      <div class="player-card-bottom">
-        <div class="player-info">
-          <div class="player-name ml-2">
-            <span id="player-name">${player.name}</span>
-          </div>
-          <div class="player-features">
-            <div class="player-features-col">
-              <span>
-                <div class="player-feature-value" id="pace">${player.pace}</div>
-                <div class="player-feature-title">PAC</div>
-              </span>
-              <span>
-                <div class="player-feature-value" id="shooting">${player.shooting}</div>
-                <div class="player-feature-title">SHO</div>
-              </span>
-              <span>
-                <div class="player-feature-value" id="passing">${player.passing}</div>
-                <div class="player-feature-title">PAS</div>
-              </span>
-            </div>
-            <div class="player-features-col">
-              <span>
-                <div class="player-feature-value" id="dribblling">${player.dribbling}</div>
-                <div class="player-feature-title">DRI</div>
-              </span>
-              <span>
-                <div class="player-feature-value" id="defending">${player.defending}</div>
-                <div class="player-feature-title">DEF</div>
-              </span>
-              <span>
-                <div class="player-feature-value" id="physical">${player.physical}</div>
-                <div class="player-feature-title">PHY</div>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-  `;
-      sideBar.appendChild(player_Card);
-      player_Card.addEventListener(
-        "click",
-        addPlayerToPosition(player, `player-card${playerId}`)
-      );
-    } else {
-      player_Card.innerHTML = `
+// function displayPlayers(playersArray) {
+//   sideBar.innerHTML = "";
+//   playersArray.map((player, playerId) => {
+//     const player_Card = document.createElement("div");
+//     player_Card.className = "fut-player-card cursor-pointer";
+//     player_Card.id = `player-card${playerId}`;
+//     if (player.position != "GK") {
+//       player_Card.innerHTML = `
+//    <div class="player-card-top">
+//         <div class="player-master-info">
+//           <div class="player-rating">
+//             <span id="player-rating">${player.rating}</span>
+//           </div>
+//           <div class="player-position">
+//             <span id="player-position">${player.position}</span>
+//           </div>
+//           <div class="player-nation">
+//             <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
+//           </div>
+//           <div class="player-club">
+//             <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
+//           </div>
+//         </div>
+//         <div class="player-picture">
+//         <img src="${player.photo}" alt="player image"></div>
+//       </div>
+//       <div class="player-card-bottom">
+//         <div class="player-info">
+//           <div class="player-name ml-2">
+//             <span id="player-name">${player.name}</span>
+//           </div>
+//           <div class="player-features">
+//             <div class="player-features-col">
+//               <span>
+//                 <div class="player-feature-value" id="pace">${player.pace}</div>
+//                 <div class="player-feature-title">PAC</div>
+//               </span>
+//               <span>
+//                 <div class="player-feature-value" id="shooting">${player.shooting}</div>
+//                 <div class="player-feature-title">SHO</div>
+//               </span>
+//               <span>
+//                 <div class="player-feature-value" id="passing">${player.passing}</div>
+//                 <div class="player-feature-title">PAS</div>
+//               </span>
+//             </div>
+//             <div class="player-features-col">
+//               <span>
+//                 <div class="player-feature-value" id="dribblling">${player.dribbling}</div>
+//                 <div class="player-feature-title">DRI</div>
+//               </span>
+//               <span>
+//                 <div class="player-feature-value" id="defending">${player.defending}</div>
+//                 <div class="player-feature-title">DEF</div>
+//               </span>
+//               <span>
+//                 <div class="player-feature-value" id="physical">${player.physical}</div>
+//                 <div class="player-feature-title">PHY</div>
+//               </span>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//   `;
+//       sideBar.appendChild(player_Card);
+//       player_Card.addEventListener(
+//         "click",
+//         addPlayerToPosition(player, `player-card${playerId}`)
+//       );
+//     } else {
+//       player_Card.innerHTML = `
     
-    <div class="player-card-top">
-        <div class="player-master-info">
-          <div class="player-rating">
-            <span id="player-rating">${player.rating}</span>
-          </div>
-          <div class="player-position">
-            <span id="player-position">${player.position}</span>
-          </div>
-          <div class="player-nation">
-            <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
-          </div>
-          <div class="player-club">
-            <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
-          </div>
-        </div>
-        <div class="player-picture">
-        <img src="${player.photo}" alt="player image"></div>
-      </div>
-      <div class="player-card-bottom">
-        <div class="player-info">
-          <div class="player-name ml-2">
-            <span id="player-name">${player.name}</span>
-          </div>
-          <div class="player-features">
-            <div class="player-features-col">
-              <span>
-                <div class="player-feature-value" id="diving">${player.diving}</div>
-                <div class="player-feature-title">DIV</div>
-              </span>
-              <span>
-                <div class="player-feature-value" id="handling">${player.handling}</div>
-                <div class="player-feature-title">HAN</div>
-              </span>
-              <span>
-                <div class="player-feature-value" id="passing">${player.kicking}</div>
-                <div class="player-feature-title">KIC</div>
-              </span>
-            </div>
-            <div class="player-features-col">
-              <span>
-                <div class="player-feature-value" id="dribblling">${player.reflexes}</div>
-                <div class="player-feature-title">REF</div>
-              </span>
-              <span>
-                <div class="player-feature-value" id="defending">${player.speed}</div>
-                <div class="player-feature-title">SPE</div>
-              </span>
-              <span>
-                <div class="player-feature-value" id="physical">${player.positioning}</div>
-                <div class="player-feature-title">POS</div>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>`;
+//     <div class="player-card-top">
+//         <div class="player-master-info">
+//           <div class="player-rating">
+//             <span id="player-rating">${player.rating}</span>
+//           </div>
+//           <div class="player-position">
+//             <span id="player-position">${player.position}</span>
+//           </div>
+//           <div class="player-nation">
+//             <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
+//           </div>
+//           <div class="player-club">
+//             <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
+//           </div>
+//         </div>
+//         <div class="player-picture">
+//         <img src="${player.photo}" alt="player image"></div>
+//       </div>
+//       <div class="player-card-bottom">
+//         <div class="player-info">
+//           <div class="player-name ml-2">
+//             <span id="player-name">${player.name}</span>
+//           </div>
+//           <div class="player-features">
+//             <div class="player-features-col">
+//               <span>
+//                 <div class="player-feature-value" id="diving">${player.diving}</div>
+//                 <div class="player-feature-title">DIV</div>
+//               </span>
+//               <span>
+//                 <div class="player-feature-value" id="handling">${player.handling}</div>
+//                 <div class="player-feature-title">HAN</div>
+//               </span>
+//               <span>
+//                 <div class="player-feature-value" id="passing">${player.kicking}</div>
+//                 <div class="player-feature-title">KIC</div>
+//               </span>
+//             </div>
+//             <div class="player-features-col">
+//               <span>
+//                 <div class="player-feature-value" id="dribblling">${player.reflexes}</div>
+//                 <div class="player-feature-title">REF</div>
+//               </span>
+//               <span>
+//                 <div class="player-feature-value" id="defending">${player.speed}</div>
+//                 <div class="player-feature-title">SPE</div>
+//               </span>
+//               <span>
+//                 <div class="player-feature-value" id="physical">${player.positioning}</div>
+//                 <div class="player-feature-title">POS</div>
+//               </span>
+//             </div>
+//           </div>
+//         </div>
+//       </div>`;
 
-      sideBar.appendChild(player_Card);
-      player_Card.addEventListener(
-        "click",
-        addPlayerToPosition(player, `player-card${playerId}`)
-      );
-    }
-  });
-}
+//       sideBar.appendChild(player_Card);
+//       player_Card.addEventListener(
+//         "click",
+//         addPlayerToPosition(player, `player-card${playerId}`)
+//       );
+//     }
+//   });
+// }
 
 function add_Player(pos) {
   let lwPLayers = playersArray.filter((player) => {
@@ -273,6 +273,7 @@ function add_Player(pos) {
   switch (pos) {
     case "LW":
       addPlayerToPosition(lwPLayers);
+      console.log(lwPLayers);
       break;
     case "ST":
       addPlayerToPosition(lwPLayers);
@@ -280,13 +281,22 @@ function add_Player(pos) {
     case "RW":
       addPlayerToPosition(lwPLayers);
       break;
-    case "CM":
+    case "CMG":
+      addPlayerToPosition(lwPLayers);
+      break;
+    case "CMC":
+      addPlayerToPosition(lwPLayers);
+      break;
+    case "CMD":
       addPlayerToPosition(lwPLayers);
       break;
     case "LB":
       addPlayerToPosition(lwPLayers);
       break;
-    case "CB":
+    case "CBG":
+      addPlayerToPosition(lwPLayers);
+      break;
+    case "CBD":
       addPlayerToPosition(lwPLayers);
       break;
     case "RB":
@@ -296,7 +306,7 @@ function add_Player(pos) {
       addPlayerToPosition(lwPLayers);
       break;
   }
-  console.log(lwPLayers);
+  
 }
 
 function addPlayerToPosition(players) {
@@ -372,7 +382,7 @@ function addPlayerToPosition(players) {
     } else {
       playerCard1.innerHTML = `
     <div class="player-card-top">
-        <div class="absolute top-5 right-1 z-10 flex flex-col items-center gap-2">
+          <div class="absolute top-5 right-1 z-10 flex flex-col items-center gap-2">
           <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full w-[20px] h-[20px]  p-2" onclick="removePlayer(this)"><i class="fa fa-trash"></i></button>
           <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full w-[20px] h-[20px]  p-2" onclick="editPlayer(this)"><i class="fa-solid fa-pen-to-square"></i></button>
           </div>
@@ -466,40 +476,48 @@ function addPlayerToField(div, cardId) {
         playersArray.splice(Index, 1);
       }
       break;
-    case "CM":
+    case "CMG":
       if (document.getElementById("player-cm-g").children.length == 0) {
         document.getElementById("player-cm-g").innerHTML = div.innerHTML;
-      } else if (document.getElementById("player-cm-c").children.length == 0) {
-        document.getElementById("player-cm-c").innerHTML = div.innerHTML;
-      } else if (document.getElementById("player-cm-d").children.length == 0) {
-        document.getElementById("player-cm-d").innerHTML = div.innerHTML;
-      }
-      div.remove();
-      playersArray.splice(Index, 1);
-
+        div.remove();
+        playersArray.splice(Index, 1);
+      } 
+      break
+    case "CMC" : if(document.getElementById("player-cm-c").children.length == 0) {
+            document.getElementById("player-cm-c").innerHTML = div.innerHTML;
+            div.remove();
+            playersArray.splice(Index, 1);
+    }
+      break;
+    case "CMD" : if(document.getElementById("player-cm-d").children.length == 0) {
+            document.getElementById("player-cm-d").innerHTML = div.innerHTML;
+            div.remove();
+            playersArray.splice(Index, 1);
+    }
       break;
     case "LB":
       if (document.getElementById("player-lb").children.length == 0) {
         document.getElementById("player-lb").innerHTML = div.innerHTML;
-
         div.remove();
         playersArray.splice(Index, 1);
       }
       break;
-    case "CB":
+    case "CBG":
       if (document.getElementById("player-cb-g").children.length == 0) {
         document.getElementById("player-cb-g").innerHTML = div.innerHTML;
-      } else if (document.getElementById("player-cb-d").children.length == 0) {
-        document.getElementById("player-cb-d").innerHTML = div.innerHTML;
+        div.remove();
+        playersArray.splice(Index, 1);
       }
-      div.remove();
-      playersArray.splice(Index, 1);
-
+      break;
+    case "CBD" : if (document.getElementById("player-cb-d").children.length == 0) {
+        document.getElementById("player-cb-d").innerHTML = div.innerHTML;
+        div.remove();
+        playersArray.splice(Index, 1);
+       }
       break;
     case "RB":
       if (document.getElementById("player-rb").children.length == 0) {
         document.getElementById("player-rb").innerHTML = div.innerHTML;
-
         div.remove();
         playersArray.splice(Index, 1);
       }
@@ -529,15 +547,17 @@ function removePlayer(element) {
 }
 
 function editPlayer(element) {
-  console.log(element.parentElement.parentElement.parentElement);
+  // console.log(element.parentElement.parentElement.parentElement);
+  let id = element.parentElement.parentElement.parentElement.id;
   modal.classList.remove("hidden");
   playersArray.map((player) => {
-    let id = element.parentElement.parentElement.parentElement.id;
-    if (id == player.id) {
-      console.log(id);
+
+    if (player.id == id) {
+      console.log(player.id);
       playerName.value = player.name;
-      // playerNationality.filename = player.flag;
-      // playerClub.value = player.logo;
+      playerImage.value = player.photo;
+      playerNationality.value = player.flag;
+      playerClub.value = player.logo;
       playerPosition.value = player.position;
       playerRating.value = player.rating;
       playerPace.value = player.pace;
@@ -546,7 +566,8 @@ function editPlayer(element) {
       playerDriblling.value = player.dribbling;
       playerDefending.value = player.defending;
       playerPhysical.value = player.physical;
-      console.log("pos", playerPosition.value);
+      
+      console.log("pos",playerPosition.value)
     }
   });
 }
