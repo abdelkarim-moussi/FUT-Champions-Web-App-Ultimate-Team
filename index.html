@@ -187,10 +187,10 @@
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
                 <div class="flex flex-col">
-                    <label for="f-image"
-                        class="rounded-md shadow-sm px-2 bg-gray-300 text-gray-600 text-sm h-[30px] mb-2 cursor-pointer flex items-center">
-                        player image (upload image)</label>
-                    <input class="hidden" id="f-image" type="file">
+                    <input id="f-image"
+                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                        type="url" placeholder="Player image url">
+
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
                 <div class="flex flex-col">
@@ -210,17 +210,15 @@
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
                 <div class="flex flex-col gap">
-                    <label for="f-nationality"
-                        class="rounded-md shadow-sm px-2 bg-gray-300 text-gray-600 text-sm h-[30px] mb-2 cursor-pointer flex items-center">
-                        player nationality (upload flag)</label>
-                    <input class="hidden" id="f-nationality" type="file">
+                    <input id="f-nationality"
+                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                        type="url" placeholder="Player nationality flag">
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
                 <div class="flex flex-col gap">
-                    <label for="f-club"
-                        class="rounded-md shadow-sm px-2 bg-gray-300 text-gray-600 text-sm h-[30px] mb-2 cursor-pointer flex items-center">player
-                        club (upload club logo)</label>
-                    <input class="hidden" id="f-club" type="file">
+                    <input id="f-club"
+                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                        type="url" placeholder="Player club logo url">
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
                 <div class="flex flex-col gap">
@@ -274,7 +272,10 @@
     </section>
 
 
+    <!--section for reserved player-->
+    <section id="reserve" class="flex flex-wrap gap-3 items-center justify-center p-10">
 
+    </section>
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/all.min.js"></script>
 </body>

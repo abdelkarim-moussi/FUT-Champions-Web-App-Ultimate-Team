@@ -59,13 +59,13 @@ let validateForm = () => {
   if (playerName.value === "" || playerName.value.length > 20) {
     showErrorMessage(playerName, "Enter a valid name");
   } else if (playerImage.value === "") {
-    showErrorMessage(playerImage, "you have to upload an image");
+    showErrorMessage(playerImage, "you have to enter a valid url");
   } else if (playerPosition.value === "none") {
     showErrorMessage(playerPosition, "you have to choose a valid position");
   } else if (playerNationality.value === "") {
-    showErrorMessage(playerNationality, "upload the nationality flag");
+    showErrorMessage(playerNationality, "you have to enter a valid url");
   } else if (playerClub.value === "") {
-    showErrorMessage(playerClub, "upload the club log");
+    showErrorMessage(playerClub, "enter a valid logo url");
   } else if (playerRating.value === "" || playerRating.value <= 0) {
     showErrorMessage(playerRating, "invalid rating number");
   } else if (playerPace.value === "" || playerPace.value <= 0) {
@@ -303,7 +303,7 @@ function addPlayerToPosition(players) {
   sideBar.innerHTML = "";
   players.map((player) => {
     let playerCard1 = document.createElement("div");
-    playerCard1.setAttribute("onclick", "addPlayerToField(this,this.id)");
+    playerCard1.setAttribute("ondblclick", "addPlayerToField(this,this.id)");
     playerCard1.className = "fut-player-card cursor-pointer";
     playerCard1.id = player.id;
 
@@ -446,7 +446,6 @@ function addPlayerToField(div, cardId) {
     case "LW":
       if (document.getElementById("player-lw").children.length == 0) {
         document.getElementById("player-lw").innerHTML = div.innerHTML;
-
         div.remove();
         playersArray.splice(Index, 1);
       }
@@ -519,30 +518,103 @@ function addPlayerToField(div, cardId) {
 
 //delete player function
 function removePlayer(element) {
+  const index = playersArray.findIndex(
+    (player) =>
+      player.id == element.parentElement.parentElement.parentElement.id
+  );
+  console.log("index", index);
   element.parentElement.parentElement.parentElement.innerHTML = "";
+  playersArray.splice(index, 1);
+  console.log("players", playersArray);
 }
 
 function editPlayer(element) {
-  console.log(element);
-  addPlayerForm.classList.remove("hidden");
-  // playersArray.map((player) => {
-  //   let id = element.parentElement.parentElement.parentElement.id;
-  //   if (id === player.id) {
-  //     console.log(id);
-  //     playerName.value = player.name;
-  //     playerNationality.value = player.flag;
-  //     playerClub.value = player.logo;
-  //     playerPosition.value = player.position;
-  //     playerRating.value = player.rating;
-  //     playerPace.value = player.pace;
-  //     playerShooting.value = player.shooting;
-  //     playerPassing.value = player.passing;
-  //     playerDriblling.value = player.driblling;
-  //     playerDefending.value = player.defending;
-  //     playerPhysical.value = player.physical;
-  //   }
-  // });
+  console.log(element.parentElement.parentElement.parentElement);
+  modal.classList.remove("hidden");
+  playersArray.map((player) => {
+    let id = element.parentElement.parentElement.parentElement.id;
+    if (id == player.id) {
+      console.log(id);
+      playerName.value = player.name;
+      // playerNationality.filename = player.flag;
+      // playerClub.value = player.logo;
+      playerPosition.value = player.position;
+      playerRating.value = player.rating;
+      playerPace.value = player.pace;
+      playerShooting.value = player.shooting;
+      playerPassing.value = player.passing;
+      playerDriblling.value = player.dribbling;
+      playerDefending.value = player.defending;
+      playerPhysical.value = player.physical;
+      console.log("pos", playerPosition.value);
+    }
+  });
 }
+
+playersArray.forEach((player) => {
+  document.getElementById("reserve").innerHTML += `
+  <div class="fut-player-card">
+  <div class="player-card-top">
+          <div class="absolute top-5 right-1 z-10 flex flex-col items-center gap-2">
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full w-[20px] h-[20px]  p-2" onclick="removePlayer(this)"><i class="fa fa-trash"></i></button>
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full w-[20px] h-[20px]  p-2" onclick="editPlayer(this)"><i class="fa-solid fa-pen-to-square"></i></button>
+          </div>
+           <div class="player-master-info">
+             <div class="player-rating">
+               <span id="player-rating">${player.rating}</span>
+             </div>
+             <div class="player-position">
+               <span id="player-position">${player.position}</span>
+             </div>
+             <div class="player-nation">
+               <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
+             </div>
+             <div class="player-club">
+               <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
+             </div>
+           </div>
+           <div class="player-picture">
+           <img src="${player.photo}" alt="player image"></div>
+         </div>
+         <div class="player-card-bottom">
+           <div class="player-info">
+             <div class="player-name ml-2">
+               <span id="player-name">${player.name}</span>
+             </div>
+             <div class="player-features">
+               <div class="player-features-col">
+                 <span>
+                   <div class="player-feature-value" id="pace">${player.pace}</div>
+                   <div class="player-feature-title">PAC</div>
+                 </span>
+                 <span>
+                   <div class="player-feature-value" id="shooting">${player.shooting}</div>
+                   <div class="player-feature-title">SHO</div>
+                 </span>
+                 <span>
+                   <div class="player-feature-value" id="passing">${player.passing}</div>
+                   <div class="player-feature-title">PAS</div>
+                 </span>
+               </div>
+               <div class="player-features-col">
+                 <span>
+                   <div class="player-feature-value" id="dribblling">${player.dribbling}</div>
+                   <div class="player-feature-title">DRI</div>
+                 </span>
+                 <span>
+                   <div class="player-feature-value" id="defending">${player.defending}</div>
+                   <div class="player-feature-title">DEF</div>
+                 </span>
+                 <span>
+                   <div class="player-feature-value" id="physical">${player.physical}</div>
+                   <div class="player-feature-title">PHY</div>
+                 </span>
+               </div>
+             </div>
+           </div>
+         </div></div>
+  `;
+});
 
 // playerCard.forEach((card) => {
 //   card.addEventListener("click", () => {
