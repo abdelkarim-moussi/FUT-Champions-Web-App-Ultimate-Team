@@ -180,7 +180,7 @@
         <h2 class="text-lg mx-auto font-bold text-white mb-3">Add Player</h2>
         <form action="" class="flex flex-col" id="add-player-form">
             <div class="grid grid-cols-2 gap-2">
-                <div class="flex flex-col gap">
+                <div class="flex flex-col">
                     <input id="f-name"
                         class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
                         type="text" placeholder="Player name">
@@ -190,7 +190,6 @@
                     <input id="f-image"
                         class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
                         type="url" placeholder="Player image url">
-
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
                 <div class="flex flex-col">
@@ -209,14 +208,26 @@
                     </select>
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
-                <div class="flex flex-col gap">
+                <div class="flex flex-col">
                     <input id="f-nationality"
                         class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="url" placeholder="Player nationality flag">
+                        type="text" placeholder="Player nationality">
+                    <div class="error-message text-red-600 text-sm font-semibold"></div>
+                </div>
+                <div class="flex flex-col">
+                    <input id="f-flag"
+                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                        type="url" placeholder="Player country flag">
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
                 <div class="flex flex-col gap">
                     <input id="f-club"
+                        class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
+                        type="text" placeholder="Player club name">
+                    <div class="error-message text-red-600 text-sm font-semibold"></div>
+                </div>
+                <div class="flex flex-col">
+                    <input id="f-logo"
                         class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
                         type="url" placeholder="Player club logo url">
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
@@ -236,31 +247,31 @@
                 <div class="flex flex-col gap">
                     <input id="f-shooting"
                         class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="number" placeholder="shooting">
+                        type="number" placeholder="shooting" min="40" max="100">
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
                 <div class="flex flex-col gap">
                     <input id="f-passing"
                         class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="number" placeholder="passing">
+                        type="number" placeholder="passing" min="40" max="100">
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
                 <div class="flex flex-col gap">
                     <input id="f-driblling"
                         class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="number" placeholder="driblling">
+                        type="number" placeholder="driblling"min="40" max="100">
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
                 <div class="flex flex-col gap">
                     <input id="f-defending"
                         class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px] mb-2"
-                        type="number" placeholder="defending">
+                        type="number" placeholder="defending" min="40" max="100">
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
                 <div class="flex flex-col">
                     <input id="f-physical"
                         class="rounded-md shadow-sm px-2 bg-gray-700 placeholder:text-gray-400 text-sm h-[30px]"
-                        type="number" placeholder="physical">
+                        type="number" placeholder="physical" min="40" max="100">
                     <div class="error-message text-red-600 text-sm font-semibold"></div>
                 </div>
             </div>

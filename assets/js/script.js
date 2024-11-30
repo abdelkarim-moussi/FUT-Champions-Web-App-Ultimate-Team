@@ -14,7 +14,9 @@ let playerName = document.getElementById("f-name");
 let playerImage = document.getElementById("f-image");
 let playerPosition = document.getElementById("f-position");
 let playerNationality = document.getElementById("f-nationality");
+let playerCountryFlag = document.getElementById("f-flag");
 let playerClub = document.getElementById("f-club");
+let playerClubLogo = document.getElementById("f-logo");
 let playerRating = document.getElementById("f-rating");
 let playerPace = document.getElementById("f-pace");
 let playerShooting = document.getElementById("f-shooting");
@@ -63,6 +65,9 @@ let validateForm = () => {
   } else if (playerPosition.value === "none") {
     showErrorMessage(playerPosition, "you have to choose a valid position");
   } else if (playerNationality.value === "") {
+    showErrorMessage(playerNationality, "you have to enter a valid nationality");
+  } else if (playerClub.value === "") {
+  } else if (playerCountryFlag.value === "") {
     showErrorMessage(playerNationality, "you have to enter a valid url");
   } else if (playerClub.value === "") {
     showErrorMessage(playerClub, "enter a valid logo url");
@@ -109,25 +114,6 @@ function adapteForm() {
 adapteForm();
 
 // playerPosition.setAttribute("onSelect", "adapteForm(");
-//create card object function
-function createPlayer() {
-  const player = {
-    name: playerName.value,
-    image: playerImage.value,
-    rating: playerRating.value,
-    position: playerPosition.value,
-    nationality: playerNationality.value,
-    club: playerClub.value,
-    pace: playerPace.value,
-    driblling: playerDriblling,
-    shooting: playerShooting,
-    defencing: playerDefending,
-    passing: playerPassing,
-    physical: playerPhysical,
-  };
-  rating.innerHTML = player.rating;
-  console.log("rating", rating);
-}
 
 // function displayPlayers(playersArray) {
 //   sideBar.innerHTML = "";
@@ -556,8 +542,10 @@ function editPlayer(element) {
       console.log(player.id);
       playerName.value = player.name;
       playerImage.value = player.photo;
-      playerNationality.value = player.flag;
-      playerClub.value = player.logo;
+      playerNationality.value = player.nationality;
+      playerCountryFlag.value = player.flag;
+      playerClub.value = player.club;
+      playerClubLogo.value = player.logo;
       playerPosition.value = player.position;
       playerRating.value = player.rating;
       playerPace.value = player.pace;
@@ -567,8 +555,8 @@ function editPlayer(element) {
       playerDefending.value = player.defending;
       playerPhysical.value = player.physical;
       
-      console.log("pos",playerPosition.value)
     }
+    console.log("pos",playerPosition.value)
   });
 }
 
@@ -637,79 +625,52 @@ playersArray.forEach((player) => {
   `;
 });
 
-// playerCard.forEach((card) => {
-//   card.addEventListener("click", () => {
-//     switch (card.id) {
-//       case "player-lw":
-//         let lwPLayers = playersArray.filter((player) => {
-//           return player.position === "LW";
-//         });
-//         displayPlayers(lwPLayers);
-//         break;
-//       case "player-st":
-//         let stPLayers = playersArray.filter((player) => {
-//           return player.position === "ST";
-//         });
-//         displayPlayers(stPLayers);
-//         break;
-//       case "player-rw":
-//         let rwPLayers = playersArray.filter((player) => {
-//           return player.position === "RW";
-//         });
-//         displayPlayers(rwPLayers);
+//function to add a new player 
 
-//         break;
-//       case "player-cm-g":
-//         let cmgPLayers = playersArray.filter((player) => {
-//           return player.position === "CM";
-//         });
-//         displayPlayers(cmgPLayers);
-//         break;
-//       case "player-cm-c":
-//         let cmcPLayers = playersArray.filter((player) => {
-//           return player.position === "CM";
-//         });
-//         displayPlayers(cmcPLayers);
-//         break;
-//       case "player-cm-d":
-//         let cmdPLayers = playersArray.filter((player) => {
-//           return player.position === "CM";
-//         });
-//         displayPlayers(cmdPLayers);
-//         break;
-//       case "player-lb":
-//         let lbPLayers = playersArray.filter((player) => {
-//           return player.position === "LB";
-//         });
-//         displayPlayers(lbPLayers);
-//         break;
-//       case "player-cb-g":
-//         let cbgPLayers = playersArray.filter((player) => {
-//           return player.position === "CB";
-//         });
-//         displayPlayers(cbgPLayers);
-//         break;
-//       case "player-cb-d":
-//         let cbdPLayers = playersArray.filter((player) => {
-//           return player.position === "CB";
-//         });
-//         displayPlayers(cbdPLayers);
-//         break;
-//       case "player-rb":
-//         let rbPLayers = playersArray.filter((player) => {
-//           return player.position === "RB";
-//         });
-//         displayPlayers(rbPLayers);
-//         break;
-//       case "player-gk":
-//         let gkPLayers = playersArray.filter((player) => {
-//           return player.position === "GK";
-//         });
-//         displayPlayers(gkPLayers);
-//         break;
-//       default:
-//         displayPlayers(playersArray);
-//         break;
-//     }
-//   });
-// });
+function addNewPlayer(){
+  let newPlayer;
+  if(playerPosition.value != "gk"){
+     newPlayer = {
+      id : playersArray.length+1,
+      name: playerName.value,
+      photo : playerImage.value,
+      position : playerPosition.value,
+      nationality : playerNationality.value,
+      flag : playerCountryFlag.value,
+      club : playerClub.value,
+      logo : playerClubLogo.value,
+      rating: playerRating.value,
+      pace: playerPace.value,
+      shooting: playerShooting.value,
+      passing: playerPassing.value,
+      driblling: playerDriblling.value,
+      defending: playerDefending.value,
+      physical: playerPhysical.value,
+    }
+  }
+
+  else {
+    newPlayer = {
+    id : playersArray.length+1,
+    name: playerName.value,
+    photo : playerImage.value,
+    position : playerPosition.value,
+    nationality : playerNationality.value,
+    flag : playerCountryFlag.value,
+    club : playerClub.value,
+    logo : playerClubLogo.value,
+    rating: playerRating.value,
+    diving: playerPace.value,
+    handling: playerShooting.value,
+    kicking: playerPassing.value,
+    reflexes: playerDriblling.value,
+    speed: playerDefending.value,
+    positioning: playerPhysical.value,
+  }
+  }
+
+  console.log("newplayer",newPlayer)
+ 
+}
+
+addPlayerBtn.addEventListener("click",addNewPlayer);
