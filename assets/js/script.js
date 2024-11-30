@@ -7,6 +7,7 @@ const sideBar = document.getElementById("side-bar");
 const field = document.getElementById("field");
 const addPlayerButton = document.getElementById("add-player-button");
 const disponiblePlayers = document.getElementById("reserve")
+const playerMatchingContainer= document.getElementById("add-player-popup")
 let error = document.querySelector(".error-message");
 
 
@@ -23,7 +24,7 @@ let playerRating = document.getElementById("f-rating");
 let playerPace = document.getElementById("f-pace");
 let playerShooting = document.getElementById("f-shooting");
 let playerPassing = document.getElementById("f-passing");
-let playerDriblling = document.getElementById("f-driblling");
+let playerDriblling = document.getElementById("f-dribbling");
 let playerDefending = document.getElementById("f-defending");
 let playerPhysical = document.getElementById("f-physical");
 
@@ -108,7 +109,7 @@ function adapteForm() {
     playerPhysical.setAttribute("placeholder", "positioning");
   } else {
     playerPace.setAttribute("placeholder", "pace");
-    playerDriblling.setAttribute("placeholder", "driblling");
+    playerDriblling.setAttribute("placeholder", "dribbling");
     playerShooting.setAttribute("placeholder", "shooting");
     playerDefending.setAttribute("placeholder", "defencing");
     playerPassing.setAttribute("placeholder", "passing");
@@ -300,7 +301,7 @@ function add_Player(pos) {
 }
 
 function addPlayerToPosition(players) {
-  sideBar.innerHTML = "";
+  playerMatchingContainer.innerHTML = "";
   players.map((player) => {
     let playerCard1 = document.createElement("div");
     playerCard1.setAttribute("ondblclick", "addPlayerToField(this,this.id)");
@@ -431,7 +432,7 @@ function addPlayerToPosition(players) {
         </div>
       </div>`;
     }
-    sideBar.appendChild(playerCard1);
+    playerMatchingContainer.appendChild(playerCard1);
   });
 }
 
@@ -761,13 +762,13 @@ function addNewPlayer(){
       flag : playerCountryFlag.value,
       club : playerClub.value,
       logo : playerClubLogo.value,
-      rating: playerRating.value,
-      pace: playerPace.value,
-      shooting: playerShooting.value,
-      passing: playerPassing.value,
-      driblling: playerDriblling.value,
-      defending: playerDefending.value,
-      physical: playerPhysical.value,
+      rating: parseInt(playerRating.value),
+      pace: parseInt(playerPace.value),
+      shooting: parseInt(playerShooting.value),
+      passing: parseInt(playerPassing.value),
+      dribbling: parseInt(playerDriblling.value),
+      defending: parseInt(playerDefending.value),
+      physical: parseInt(playerPhysical.value),
     }
   }
 
@@ -781,13 +782,13 @@ function addNewPlayer(){
     flag : playerCountryFlag.value,
     club : playerClub.value,
     logo : playerClubLogo.value,
-    rating: playerRating.value,
-    diving: playerPace.value,
-    handling: playerShooting.value,
-    kicking: playerPassing.value,
-    reflexes: playerDriblling.value,
-    speed: playerDefending.value,
-    positioning: playerPhysical.value,
+    rating: parseInt(playerRating.value),
+    diving: parseInt(playerPace.value),
+    handling: parseInt(playerShooting.value),
+    kicking: parseInt(playerPassing.value),
+    reflexes: parseInt(playerDriblling.value),
+    speed: parseInt(playerDefending.value),
+    positioning: parseInt(playerPhysical.value),
   }
   }
   updateLocalStroage(newPlayer,"add")
