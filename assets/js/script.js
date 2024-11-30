@@ -40,7 +40,10 @@ addPlayerButton.addEventListener("click", () => {
 fetch("../../players.json")
   .then((respense) => respense.json())
   .then((data) => {
-    localStorage.setItem(`players`, JSON.stringify(data.players));
+    if(!localStorage){
+      localStorage.setItem(`players`, JSON.stringify(data.players));
+    }
+  
   });
 
 let playersArray = JSON.parse(localStorage.getItem("players"));
@@ -668,9 +671,21 @@ function addNewPlayer(){
     positioning: playerPhysical.value,
   }
   }
+  updateLocalStroage(newPlayer,"add")
+}
 
-  console.log("newplayer",newPlayer)
- 
+function updateLocalStroage(player,mod){
+  if(mod === "sup"){
+    const index = findIndex(p => p.id == player.id);
+    playersArray.splice(index,1);
+    localStorage.setItem("players",JSON.stringify(playersArray))
+    console.log("players",playersArray)
+  }
+  else {
+    playersArray.push(player);
+    localStorage.setItem("players",JSON.stringify(playersArray))
+    console.log("players",playersArray)
+  }
 }
 
 addPlayerBtn.addEventListener("click",addNewPlayer);
