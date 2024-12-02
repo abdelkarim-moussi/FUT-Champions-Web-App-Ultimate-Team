@@ -18,13 +18,13 @@
     <title>FUT-CHAMPIONS WEB APP</title>
 </head>
 
-<body class="px-10">
+<body class="md:px-10">
     <header
-        class="px-5 py-2 flex justify-around items-center shadow-md shadow-[#5ce1e6] rounded-md mt-5 max-w-[800px] mx-auto text-white">
+        class="px-5 py-2 flex justify-around items-center shadow-md shadow-[#5ce1e6] rounded-md mt-5 md:max-w-[800px] w-full mx-auto text-white">
         <div class="logo w-[60px]">
             <img src="./assets/imgs/FUT.png" alt="FUT">
         </div>
-        <ul class="flex justify-between gap-10">
+        <ul class="hidden md:flex justify-between gap-10">
             <li><a class="text-sm hover:text-[#5CE1E6]" href="#">Home</a></li>
             <li><a class="text-sm hover:text-[#5CE1E6]" href="#">Teams</a></li>
             <li><a class="text-sm hover:text-[#5CE1E6]" href="#">Players</a></li>
@@ -35,23 +35,26 @@
             class="text-black bg-[#5ce1e6] px-4 py-1 rounded-md capitalize hover:bg-[#46bdc3] focus:ring-0 focus:outline-none ">
             add new player
         </button>
+        
     </div>
+
+    
     <main class="my-2 md:flex grid grid-cols-1 gap-5">
-        <section class="bg-gray-800 rounded-md shadow-md shadow-[#5ce1e6] md:w-[70%] w-[100%]">
-            <div id="field" class="w-[100%] flex flex-col items-center justify-center gap-10 rounded-md shadow-md p-10">
+        <section class="bg-gray-800 rounded-md shadow-md shadow-[#5ce1e6] md:w-[70%] w-full">
+            <div id="field" class="w-full flex flex-col items-center justify-center gap-10 rounded-md shadow-md p-10">
 
                 <!--attaque-->
                 <div class="attaque flex gap-10 justify-center">
                     <div class="flex flex-col items-center justify-center">
-                        <div class="fut-player-card cursor-pointer" id="player-lw" onclick="add_Player('LW')">
+                        <div class="fut-player-card cursor-pointer w-[85px] h-[120px] md:w-[140px] md:h-[200px]" id="player-lw" onclick="add_Player('LW')">
                         </div>
                         <div class="border px-2 shadow-md shadow-white hover:shadow-[#5ce1e6] hover:border-[#5ce1e6] cursor-pointer"
                             style="border-radius : 50%;transform: rotateX(45deg)">
                             <p class="p-position text-white">LW</p>
                         </div>
                     </div>
-                    <div class="flex flex-col items-center justify-center">
-                        <div class="fut-player-card cursor-pointer" id="player-st" onclick="add_Player('ST')">
+                    <div class="flex flex-col items-center justify-center mb-[50px]">
+                        <div class="fut-player-card cursor-pointer w-[85px] h-[120px] md:w-[140px] md:h-[200px]" id="player-st" onclick="add_Player('ST')">
 
                         </div>
                         <div class="border px-2 shadow-md shadow-white hover:shadow-[#5ce1e6] hover:border-[#5ce1e6] cursor-pointer"
@@ -60,7 +63,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col items-center justify-center">
-                        <div class="fut-player-card cursor-pointer" id="player-rw" onclick="add_Player('RW')">
+                        <div class="fut-player-card cursor-pointer w-[85px] h-[120px] md:w-[140px] md:h-[200px]" id="player-rw" onclick="add_Player('RW')">
 
                         </div>
                         <div class="border px-2 shadow-md shadow-white hover:shadow-[#5ce1e6] hover:border-[#5ce1e6] cursor-pointer"
@@ -74,7 +77,7 @@
 
                 <div class="center flex gap-10 justify-center">
                     <div class="flex flex-col items-center justify-center">
-                        <div class="fut-player-card cursor-pointer" id="player-cm-g" onclick="add_Player('CMG')">
+                        <div class="fut-player-card cursor-pointer w-[85px] h-[120px] md:w-[140px] md:h-[200px]" id="player-cm-g" onclick="add_Player('CMG')">
 
                         </div>
                         <div class="border px-2 shadow-md shadow-white hover:shadow-[#5ce1e6] hover:border-[#5ce1e6] cursor-pointer"
@@ -83,8 +86,8 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col items-center justify-center">
-                        <div class="fut-player-card cursor-pointer " id="player-cm-c" onclick="add_Player('CMC')">
+                    <div class="flex flex-col items-center justify-center mb-[50px]">
+                        <div class="fut-player-card cursor-pointer w-[85px] h-[120px] md:w-[140px] md:h-[200px] " id="player-cm-c" onclick="add_Player('CMC')">
 
                         </div>
                         <div class="border px-2 shadow-md shadow-white hover:shadow-[#5ce1e6] hover:border-[#5ce1e6] cursor-pointer"
@@ -93,7 +96,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col items-center justify-center">
-                        <div class="fut-player-card cursor-pointer" id="player-cm-d" onclick="add_Player('CMD')">
+                        <div class="fut-player-card cursor-pointer w-[85px] h-[120px] md:w-[140px] md:h-[200px]" id="player-cm-d" onclick="add_Player('CMD')">
 
                         </div>
                         <div class="border px-2 shadow-md shadow-white hover:shadow-[#5ce1e6] hover:border-[#5ce1e6] cursor-pointer"
@@ -104,9 +107,9 @@
                 </div>
 
                 <!--defence-->
-                <div class="deffence flex gap-10 justify-center">
+                <div class="deffence grid grid-cols-4 md:flex gap-20 md:gap-10 md:justify-center">
                     <div class="flex flex-col items-center justify-center">
-                        <div class="fut-player-card cursor-pointer" id="player-lb" onclick="add_Player('LB')">
+                        <div class="fut-player-card cursor-pointer w-[85px] h-[120px] md:w-[140px] md:h-[200px]" id="player-lb" onclick="add_Player('LB')">
 
                         </div>
                         <div class="border px-2 shadow-md shadow-white hover:shadow-[#5ce1e6] hover:border-[#5ce1e6] cursor-pointer"
@@ -115,8 +118,18 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col items-center justify-center">
-                        <div class="fut-player-card cursor-pointer" id="player-cb-g" onclick="add_Player('CBG')">
+                    <div class="flex flex-col items-center justify-center md:mt-[50px]">
+                        <div class="fut-player-card cursor-pointer w-[85px] h-[120px] md:w-[140px] md:h-[200px] mt-[40px]" id="player-cb-g" onclick="add_Player('CBG')">
+
+                        </div>
+                        <div class="border px-2 shadow-md shadow-white hover:shadow-[#5ce1e6] hover:border-[#5ce1e6] cursor-pointer"
+                            style="border-radius : 50%;transform: rotateX(45deg)">
+                            <p class="p-position text-white">CB</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col items-center justify-center md:mt-[50px]">
+                        <div class="fut-player-card cursor-pointer w-[85px] h-[120px] md:w-[140px] md:h-[200px] mt-[40px]" id="player-cb-d" onclick="add_Player('CBD')">
 
                         </div>
                         <div class="border px-2 shadow-md shadow-white hover:shadow-[#5ce1e6] hover:border-[#5ce1e6] cursor-pointer"
@@ -126,17 +139,7 @@
                     </div>
 
                     <div class="flex flex-col items-center justify-center">
-                        <div class="fut-player-card cursor-pointer" id="player-cb-d" onclick="add_Player('CBD')">
-
-                        </div>
-                        <div class="border px-2 shadow-md shadow-white hover:shadow-[#5ce1e6] hover:border-[#5ce1e6] cursor-pointer"
-                            style="border-radius : 50%;transform: rotateX(45deg)">
-                            <p class="p-position text-white">CB</p>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col items-center justify-center">
-                        <div class="fut-player-card cursor-pointer" id="player-rb" onclick="add_Player('RB')">
+                        <div class="fut-player-card cursor-pointer w-[85px] h-[120px] md:w-[140px] md:h-[200px]" id="player-rb" onclick="add_Player('RB')">
 
                         </div>
                         <div class="border px-2 shadow-md shadow-white hover:shadow-[#5ce1e6] hover:border-[#5ce1e6] cursor-pointer"
@@ -150,7 +153,7 @@
                 <!--gol keaper-->
                 <div class="gol-keaper flex flex-col items-center justify-center">
                     <div class="flex flex-col items-center justify-center">
-                        <div class="fut-player-card cursor-pointer" id="player-gk" onclick="add_Player('GK')">
+                        <div class="fut-player-card cursor-pointer w-[85px] h-[120px] md:w-[140px] md:h-[200px]" id="player-gk" onclick="add_Player('GK')">
 
                         </div>
                         <div class="border px-2 shadow-md shadow-white hover:shadow-[#5ce1e6] hover:border-[#5ce1e6] cursor-pointer"
@@ -163,18 +166,18 @@
         </section>
 
         <!--side bar-->
-    
-        <section id="side-bar"
-            class="flex flex-wrap justify-center p-2 gap-2 md:gap-3 md:w-[30%] w-[100%] bg-gray-800 rounded-md shadow-md shadow-[#5ce1e6] overflow-scroll"
-            style="height:fit-content; min-height: 60vh; max-height: 155vh;">
-        </section>
-    </main>
-
-    <section id="add-player-popup" class="bg-[#5ce1e6] w-[400px] h-[500px]">
-
+    <section class="flex flex-col md:w-[30%] w-[100%] gap-5">
+        <div id="side-bar"
+        class="flex flex-wrap justify-center p-2 gap-2 md:gap-3  bg-gray-800 rounded-md shadow-md shadow-[#5ce1e6] overflow-auto"
+        style="height:fit-content;min-height: 60vh;flex: 1;">
+        </div>
+        <div id="replacement"
+        class="flex flex-wrap justify-center p-2 gap-2 md:gap-3  bg-gray-800 rounded-md shadow-md shadow-[#5ce1e6]"
+        style="height:fit-content;min-height: 60vh; flex: 1;">
+        </div>
     </section>
-
-
+        
+    </main>
 
     <!--modal for add players-->
     <section
@@ -203,13 +206,13 @@
                         name="f-position" id="f-position" onchange="adapteForm()">
                         <option value="none">player position</option>
                         <option value="GK">GK</option>
-                        <option value="CBG">CB</option>
-                        <option value="CBD">CB</option>
+                        <option value="CBG">CBG</option>
+                        <option value="CBD">CBD</option>
                         <option value="LB">LB</option>
                         <option value="CB">CB</option>
-                        <option value="CMD">CM</option>
-                        <option value="CMC">CM</option>
-                        <option value="CMD">CM</option>
+                        <option value="CMD">CMD</option>
+                        <option value="CMC">CMC</option>
+                        <option value="CMD">CMD</option>
                         <option value="RW">RW</option>
                         <option value="ST">ST</option>
                         <option value="ST">LW</option>
@@ -292,8 +295,7 @@
 
 
     <!--section for reserved player-->
-    <section id="reserve" class="flex flex-wrap gap-3 items-center justify-center p-10">
-
+    <section id="reserve" class="flex flex-wrap gap-3 items-center justify-center md:p-10 p-2">
     </section>
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/all.min.js"></script>

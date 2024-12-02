@@ -7,7 +7,7 @@ const sideBar = document.getElementById("side-bar");
 const field = document.getElementById("field");
 const addPlayerButton = document.getElementById("add-player-button");
 const disponiblePlayers = document.getElementById("reserve")
-const playerMatchingContainer= document.getElementById("add-player-popup")
+const replacementContainer= document.getElementById("replacement")
 let error = document.querySelector(".error-message");
 
 
@@ -35,22 +35,27 @@ function hideModal() {
 }
 closeModalBtn.addEventListener("click", hideModal);
 
+
 addPlayerButton.addEventListener("click", () => {
   modal.classList.remove("hidden");
 });
 
 //players array
+
 fetch("../../players.json")
   .then((respense) => respense.json())
   .then((data) => {
-    if(localStorage.length == 0){
+    if(!localStorage.getItem("players")){
       localStorage.setItem(`players`, JSON.stringify(data.players));
     }
-  
   });
 
-let playersArray = JSON.parse(localStorage.getItem("players"));
+  let playersArray = JSON.parse(localStorage.getItem("players"));
+  let replacementPlayers = [];
 
+  if(!localStorage.getItem("replacementPlayers")){
+  localStorage.setItem("replacementPlayers",JSON.stringify(replacementPlayers));
+  }
 //stop the default behavior of the form on submit by using preventdefault method
 addPlayerForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -118,144 +123,6 @@ function adapteForm() {
 }
 adapteForm();
 
-// playerPosition.setAttribute("onSelect", "adapteForm(");
-
-// function displayPlayers(playersArray) {
-//   sideBar.innerHTML = "";
-//   playersArray.map((player, playerId) => {
-//     const player_Card = document.createElement("div");
-//     player_Card.className = "fut-player-card cursor-pointer";
-//     player_Card.id = `player-card${playerId}`;
-//     if (player.position != "GK") {
-//       player_Card.innerHTML = `
-//    <div class="player-card-top">
-//         <div class="player-master-info">
-//           <div class="player-rating">
-//             <span id="player-rating">${player.rating}</span>
-//           </div>
-//           <div class="player-position">
-//             <span id="player-position">${player.position}</span>
-//           </div>
-//           <div class="player-nation">
-//             <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
-//           </div>
-//           <div class="player-club">
-//             <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
-//           </div>
-//         </div>
-//         <div class="player-picture">
-//         <img src="${player.photo}" alt="player image"></div>
-//       </div>
-//       <div class="player-card-bottom">
-//         <div class="player-info">
-//           <div class="player-name ml-2">
-//             <span id="player-name">${player.name}</span>
-//           </div>
-//           <div class="player-features">
-//             <div class="player-features-col">
-//               <span>
-//                 <div class="player-feature-value" id="pace">${player.pace}</div>
-//                 <div class="player-feature-title">PAC</div>
-//               </span>
-//               <span>
-//                 <div class="player-feature-value" id="shooting">${player.shooting}</div>
-//                 <div class="player-feature-title">SHO</div>
-//               </span>
-//               <span>
-//                 <div class="player-feature-value" id="passing">${player.passing}</div>
-//                 <div class="player-feature-title">PAS</div>
-//               </span>
-//             </div>
-//             <div class="player-features-col">
-//               <span>
-//                 <div class="player-feature-value" id="dribblling">${player.dribbling}</div>
-//                 <div class="player-feature-title">DRI</div>
-//               </span>
-//               <span>
-//                 <div class="player-feature-value" id="defending">${player.defending}</div>
-//                 <div class="player-feature-title">DEF</div>
-//               </span>
-//               <span>
-//                 <div class="player-feature-value" id="physical">${player.physical}</div>
-//                 <div class="player-feature-title">PHY</div>
-//               </span>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//   `;
-//       sideBar.appendChild(player_Card);
-//       player_Card.addEventListener(
-//         "click",
-//         addPlayerToPosition(player, `player-card${playerId}`)
-//       );
-//     } else {
-//       player_Card.innerHTML = `
-    
-//     <div class="player-card-top">
-//         <div class="player-master-info">
-//           <div class="player-rating">
-//             <span id="player-rating">${player.rating}</span>
-//           </div>
-//           <div class="player-position">
-//             <span id="player-position">${player.position}</span>
-//           </div>
-//           <div class="player-nation">
-//             <span id="player-nation"><img src="${player.flag}" alt="nation flag"></span>
-//           </div>
-//           <div class="player-club">
-//             <span id="player-club"><img src="${player.logo}" alt="club flag"></span>
-//           </div>
-//         </div>
-//         <div class="player-picture">
-//         <img src="${player.photo}" alt="player image"></div>
-//       </div>
-//       <div class="player-card-bottom">
-//         <div class="player-info">
-//           <div class="player-name ml-2">
-//             <span id="player-name">${player.name}</span>
-//           </div>
-//           <div class="player-features">
-//             <div class="player-features-col">
-//               <span>
-//                 <div class="player-feature-value" id="diving">${player.diving}</div>
-//                 <div class="player-feature-title">DIV</div>
-//               </span>
-//               <span>
-//                 <div class="player-feature-value" id="handling">${player.handling}</div>
-//                 <div class="player-feature-title">HAN</div>
-//               </span>
-//               <span>
-//                 <div class="player-feature-value" id="passing">${player.kicking}</div>
-//                 <div class="player-feature-title">KIC</div>
-//               </span>
-//             </div>
-//             <div class="player-features-col">
-//               <span>
-//                 <div class="player-feature-value" id="dribblling">${player.reflexes}</div>
-//                 <div class="player-feature-title">REF</div>
-//               </span>
-//               <span>
-//                 <div class="player-feature-value" id="defending">${player.speed}</div>
-//                 <div class="player-feature-title">SPE</div>
-//               </span>
-//               <span>
-//                 <div class="player-feature-value" id="physical">${player.positioning}</div>
-//                 <div class="player-feature-title">POS</div>
-//               </span>
-//             </div>
-//           </div>
-//         </div>
-//       </div>`;
-
-//       sideBar.appendChild(player_Card);
-//       player_Card.addEventListener(
-//         "click",
-//         addPlayerToPosition(player, `player-card${playerId}`)
-//       );
-//     }
-//   });
-// }
 
 function add_Player(pos) {
   let lwPLayers = playersArray.filter((player) => {
@@ -301,23 +168,24 @@ function add_Player(pos) {
 }
 
 function addPlayerToPosition(players) {
-  playerMatchingContainer.innerHTML = "";
+  sideBar.innerHTML = "";
   players.map((player) => {
     let playerCard1 = document.createElement("div");
     playerCard1.setAttribute("ondblclick", "addPlayerToField(this,this.id)");
-    playerCard1.className = "fut-player-card cursor-pointer";
+    playerCard1.className = "fut-player-card cursor-pointer z-0";
     playerCard1.id = player.id;
 
     if (player.position != "GK") {
       playerCard1.innerHTML = `
       <div class="player-card-top">
-          <div class="absolute top-5 right-1 z-10 flex flex-col items-center gap-2">
-          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full w-[20px] h-[20px]  p-2" onclick="removePlayer(this)"><i class="fa fa-trash"></i></button>
-          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full w-[20px] h-[20px]  p-2" onclick="editPlayer(this)"><i class="fa-solid fa-pen-to-square"></i></button>
+          <div class="absolute md:top-2 top-0 right-1 z-10 flex flex-col items-center gap-1">
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full md:w-[20px] md:h-[20px]  p-[2px] md:p-2" onclick="removePlayer(this,${player.id})"><i class="fa fa-trash w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full md:w-[20px] md:h-[20px]  p-[2px] md:p-2" onclick="editPlayer(this)"><i class="fa-solid fa-pen-to-square w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full  md:w-[20px] md:h-[20px] p-[2px] md:p-2" onclick="replacePlayer(this,${player.id})"><i class="fa-solid fa-rotate w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
           </div>
            <div class="player-master-info">
              <div class="player-rating">
-               <span id="player-rating">${player.rating}</span>
+               <span id="player-rating" class="text-sm md:text-md">${player.rating}</span>
              </div>
              <div class="player-position">
                <span id="player-position">${player.position}</span>
@@ -374,8 +242,9 @@ function addPlayerToPosition(players) {
       playerCard1.innerHTML = `
     <div class="player-card-top">
           <div class="absolute top-5 right-1 z-10 flex flex-col items-center gap-2">
-          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full w-[20px] h-[20px]  p-2" onclick="removePlayer(this)"><i class="fa fa-trash"></i></button>
-          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full w-[20px] h-[20px]  p-2" onclick="editPlayer(this)"><i class="fa-solid fa-pen-to-square"></i></button>
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full md:w-[20px] md:h-[20px]  p-1" onclick="removePlayer(this)"><i class="fa fa-trash w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full md:w-[20px] md:h-[20px]  p-1" onclick="editPlayer(this)"><i class="fa-solid fa-pen-to-square w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full  md:w-[20px] md:h-[20px]  p-1"><i class="fa-solid fa-rotate w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
           </div>
         <div class="player-master-info">
           <div class="player-rating">
@@ -432,17 +301,15 @@ function addPlayerToPosition(players) {
         </div>
       </div>`;
     }
-    playerMatchingContainer.appendChild(playerCard1);
+    sideBar.appendChild(playerCard1);
   });
 }
+
 
 function addPlayerToField(div, cardId) {
   const Index = playersArray.findIndex((player) => player.id == cardId);
   let player = playersArray[Index];
-  console.log(player);
-  // console.log(player.id);
-  // if (cardId === player.id) {
-  // console.log("pId", player.id);
+
   switch (player.position) {
     case "LW":
       if (document.getElementById("player-lw").children.length == 0) {
@@ -450,6 +317,12 @@ function addPlayerToField(div, cardId) {
         div.remove();
         playersArray.splice(Index, 1);
       }
+      else if(replacementPlayers.filter(player => player.position ==="LW").length < 1 && replacementPlayers.length < 7){
+          replacementPlayers.push(playersArray[Index]);
+          updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+          replacementContainer.appendChild(div);
+         }
+      
       break;
     case "ST":
       if (document.getElementById("player-st").children.length == 0) {
@@ -458,13 +331,22 @@ function addPlayerToField(div, cardId) {
         div.remove();
         playersArray.splice(Index, 1);
       }
-
+      else if(replacementPlayers.filter(player => player.position ==="ST").length < 1 && replacementPlayers.length < 7){
+        replacementPlayers.push(playersArray[Index]);
+        updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+        replacementContainer.appendChild(div);
+      }
       break;
     case "RW":
       if (document.getElementById("player-rw").children.length == 0) {
         document.getElementById("player-rw").innerHTML = div.innerHTML;
         div.remove();
         playersArray.splice(Index, 1);
+      }
+      else if(replacementPlayers.filter(player => player.position ==="RW").length < 1 && replacementPlayers.length < 7){
+        replacementPlayers.push(playersArray[Index]);
+          updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+          replacementContainer.appendChild(div);
       }
       break;
     case "CMG":
@@ -473,17 +355,33 @@ function addPlayerToField(div, cardId) {
         div.remove();
         playersArray.splice(Index, 1);
       } 
+      else if(replacementPlayers.filter(player => player.position ==="CMG").length < 1 && replacementPlayers.length < 7){
+        replacementPlayers.push(playersArray[Index]);
+        updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+        replacementContainer.appendChild(div);
+        }
+      
       break
     case "CMC" : if(document.getElementById("player-cm-c").children.length == 0) {
             document.getElementById("player-cm-c").innerHTML = div.innerHTML;
             div.remove();
             playersArray.splice(Index, 1);
     }
+    else if(replacementPlayers.filter(player => player.position ==="CMC").length < 1 && replacementPlayers.length < 7){
+      replacementPlayers.push(playersArray[Index]);
+      updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+      replacementContainer.appendChild(div);
+    }
       break;
     case "CMD" : if(document.getElementById("player-cm-d").children.length == 0) {
             document.getElementById("player-cm-d").innerHTML = div.innerHTML;
             div.remove();
             playersArray.splice(Index, 1);
+    }
+    else if(replacementPlayers.filter(player => player.position ==="CMD").length < 1 && replacementPlayers.length < 7){
+      replacementPlayers.push(playersArray[Index]);
+      updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+      replacementContainer.appendChild(div);
     }
       break;
     case "LB":
@@ -492,6 +390,11 @@ function addPlayerToField(div, cardId) {
         div.remove();
         playersArray.splice(Index, 1);
       }
+      else if(replacementPlayers.filter(player => player.position ==="LB").length < 1 && replacementPlayers.length < 7){
+        replacementPlayers.push(playersArray[Index]);
+        updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+        replacementContainer.appendChild(div);
+      }
       break;
     case "CBG":
       if (document.getElementById("player-cb-g").children.length == 0) {
@@ -499,12 +402,22 @@ function addPlayerToField(div, cardId) {
         div.remove();
         playersArray.splice(Index, 1);
       }
+      else if(replacementPlayers.filter(player => player.position ==="CBG").length < 1 && replacementPlayers.length < 7){
+        replacementPlayers.push(playersArray[Index]);
+        updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+        replacementContainer.appendChild(div);
+      }
       break;
     case "CBD" : if (document.getElementById("player-cb-d").children.length == 0) {
         document.getElementById("player-cb-d").innerHTML = div.innerHTML;
         div.remove();
         playersArray.splice(Index, 1);
        }
+       else if(replacementPlayers.filter(player => player.position ==="CBG").length < 1 && replacementPlayers.length < 7){
+        replacementPlayers.push(playersArray[Index]);
+        updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+        replacementContainer.appendChild(div);
+      }
       break;
     case "RB":
       if (document.getElementById("player-rb").children.length == 0) {
@@ -512,27 +425,38 @@ function addPlayerToField(div, cardId) {
         div.remove();
         playersArray.splice(Index, 1);
       }
+      else if(replacementPlayers.filter(player => player.position ==="RB").length < 1 && replacementPlayers.length < 7){
+        replacementPlayers.push(playersArray[Index]);
+        updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+        replacementContainer.appendChild(div);
+      }
       break;
     case "GK":
       if (document.getElementById("player-gk").children.length == 0) {
         document.getElementById("player-gk").innerHTML = div.innerHTML;
-
         div.remove();
         playersArray.splice(Index, 1);
       }
+      else if(replacementPlayers.filter(player => player.position ==="GK").length < 1 && replacementPlayers.length < 7){
+        replacementPlayers.push(playersArray[Index]);
+        updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+        replacementContainer.appendChild(div);
+      }
       break;
   }
-  // }
+
 }
+
+
 
 //delete player function
-function removePlayer(element) {
-  let player = playersArray.filter(p => p.id == element.parentElement.parentElement.parentElement.id)
-  updateLocalStroage(player,"sup")
+function removePlayer(element,id) {
+  element.parentElement.parentElement.parentElement.innerHTML = ""
+  // let player = playersArray.filter(p => p.id == id)
+  console.log("id",id)
+  updateLocalStroage("players",playersArray,id,"sup")
   // console.log("players", playersArray);
 }
-
-
 
 const updatePlayerBtn = document.createElement("button");
 updatePlayerBtn.className = "text-white bg-[#5ce1e6] px-2 py-1 rounded-md mt-2 focus:outline-none focus:border-none";
@@ -540,7 +464,7 @@ updatePlayerBtn.innerText = "Update Player";
 
 var play;
 function editPlayer(element) {
-  // console.log(element.parentElement.parentElement.parentElement);
+  console.log(element.parentElement.parentElement.parentElement.id);
   let id = element.parentElement.parentElement.parentElement.id;
   console.log("cardId",id)
   modal.classList.remove("hidden");
@@ -550,7 +474,9 @@ function editPlayer(element) {
 
     for(let i = 0;i < playersArray.length;i++){
       if (playersArray[i].id == id) {
+        console.log("true")
         if(playersArray[i].position != "GK"){
+          console.log("true")
           playerName.value = playersArray[i].name;
           playerImage.value = playersArray[i].photo;
           playerNationality.value = playersArray[i].nationality;
@@ -591,10 +517,12 @@ function editPlayer(element) {
     }
     
 }
+
 updatePlayerBtn.addEventListener("click",()=>{
   updatePlayerInfo(play)
-  playersArray.splice(playersArray.findIndex( p => p.id == play.id),1);
-  updateLocalStroage(play,"add");
+  updateLocalStroage("players",playersArray,play.id,"update");
+  // playersArray.splice(playersArray.findIndex( p => p.id == play.id),1);
+  console.log("playId",play.id)
 } )
 
 
@@ -602,6 +530,7 @@ function updatePlayerInfo(player){
   playersArray.map(p=>{
     if(player.id == p.id){
       if(player.position != "GK"){
+        console.log(true)
         player.name = playerName.value ;
         player.photo = playerImage.value;
         player.nationality = playerNationality.value;
@@ -617,15 +546,31 @@ function updatePlayerInfo(player){
         player.defending = playerDefending.value;
         player.physical = playerPhysical.value;
       }
+      else{
+        player.name = playerName.value ;
+        player.photo = playerImage.value;
+        player.nationality = playerNationality.value;
+        player.flag = playerCountryFlag.value;
+        player.club = playerClub.value ;
+        player.logo = playerClubLogo.value;
+        player.position = playerPosition.value;
+        player.rating = playerRating.value;
+        player.diving = playerPace.value;
+        player.handling = playerShooting.value;
+        player.kicking = playerPassing.value;
+        player.reflexes = playerDriblling.value;
+        player.speed = playerDefending.value;
+        player.positioning = playerPhysical.value;
+      }
     }
   })
   
-
 }
 
 
 //disponible players
-playersArray.forEach((player) => {
+function displayAllPlayers(container,array){
+array.forEach((player) => {
   let resevedPlayer = document.createElement("div");
   resevedPlayer.className = "fut-player-card"
   if(player.position != "GK"){
@@ -746,8 +691,9 @@ playersArray.forEach((player) => {
         </div>
       </div>`;
   }
-  disponiblePlayers.appendChild(resevedPlayer);
+  container.appendChild(resevedPlayer);
 });
+}
 
 //function to add a new player 
 function addNewPlayer(){
@@ -791,22 +737,43 @@ function addNewPlayer(){
     positioning: parseInt(playerPhysical.value),
   }
   }
-  updateLocalStroage(newPlayer,"add")
+  playersArray.push(newPlayer);
+  // playersArray.sort((a,b)=> a.id - b.id);
+  localStorage.setItem("players",JSON.stringify(playersArray))
+  console.log(newPlayer)
+  console.log(playersArray)
 }
 
-function updateLocalStroage(player,mod){
+function updateLocalStroage(arrayKey,array,id,mod){
+  let Index = array.findIndex(p => p.id == id)
+    console.log("Index",Index)  
   if(mod === "sup"){
-    playersArray.splice(player.id,1);
-    localStorage.setItem("players",JSON.stringify(playersArray))
-    console.log("players",playersArray)
+    array.splice(Index,1);
+    localStorage.setItem(arrayKey,JSON.stringify(array))
+    console.log(arrayKey,array)
     alert("player deleted succefully")
   }
-  else {
-    playersArray.push(player);
-    playersArray.sort((a,b)=> a.id - b.id);
-    localStorage.setItem("players",JSON.stringify(playersArray))
-    console.log("players",playersArray)
+  else if(mod==="update"){
+    array.push(array[Index]);
+    array.splice(array.findIndex( p => p.id == play.id),1);
+    array.sort((a,b)=> a.id - b.id);
+    localStorage.setItem(arrayKey,JSON.stringify(array))
+    console.log(arrayKey,array)
+  }
+  else if(mod === "add"){
+    array.push(array[Index]);
+    localStorage.setItem(arrayKey,JSON.stringify(array))
+    console.log(arrayKey,array)
   }
 }
 
 addPlayerBtn.addEventListener("click",addNewPlayer);
+
+
+function replacePlayer(){
+  displayAllPlayers(replacementContainer,replacementPlayers);
+}
+
+
+displayAllPlayers(disponiblePlayers,playersArray);
+
