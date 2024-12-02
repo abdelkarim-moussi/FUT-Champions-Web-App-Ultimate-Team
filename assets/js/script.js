@@ -51,11 +51,13 @@ fetch("../../players.json")
   });
 
   let playersArray = JSON.parse(localStorage.getItem("players"));
+  
   let replacementPlayers = [];
-
   if(!localStorage.getItem("replacementPlayers")){
   localStorage.setItem("replacementPlayers",JSON.stringify(replacementPlayers));
   }
+  replacementPlayers = JSON.parse(localStorage.getItem("replacementPlayers"))
+  
 //stop the default behavior of the form on submit by using preventdefault method
 addPlayerForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -123,6 +125,7 @@ function adapteForm() {
 }
 adapteForm();
 
+//add player function
 
 function add_Player(pos) {
   let lwPLayers = playersArray.filter((player) => {
@@ -167,6 +170,7 @@ function add_Player(pos) {
   
 }
 
+//add player to the position
 function addPlayerToPosition(players) {
   sideBar.innerHTML = "";
   players.map((player) => {
@@ -181,7 +185,7 @@ function addPlayerToPosition(players) {
           <div class="absolute md:top-2 top-0 right-1 z-10 flex flex-col items-center gap-1">
           <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full md:w-[20px] md:h-[20px]  p-[2px] md:p-2" onclick="removePlayer(this,${player.id})"><i class="fa fa-trash w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
           <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full md:w-[20px] md:h-[20px]  p-[2px] md:p-2" onclick="editPlayer(this)"><i class="fa-solid fa-pen-to-square w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
-          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full  md:w-[20px] md:h-[20px] p-[2px] md:p-2" onclick="replacePlayer(this,${player.id})"><i class="fa-solid fa-rotate w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full  md:w-[20px] md:h-[20px] p-[2px] md:p-2" onclick="replacePlayer(this)"><i class="fa-solid fa-rotate w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
           </div>
            <div class="player-master-info">
              <div class="player-rating">
@@ -244,7 +248,7 @@ function addPlayerToPosition(players) {
           <div class="absolute top-5 right-1 z-10 flex flex-col items-center gap-2">
           <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full md:w-[20px] md:h-[20px]  p-1" onclick="removePlayer(this)"><i class="fa fa-trash w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
           <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full md:w-[20px] md:h-[20px]  p-1" onclick="editPlayer(this)"><i class="fa-solid fa-pen-to-square w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
-          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full  md:w-[20px] md:h-[20px]  p-1"><i class="fa-solid fa-rotate w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
+          <button type="button" class="flex items-center justify-center text-black text-xs bg-[#5ce1e6] rounded-full  md:w-[20px] md:h-[20px]  p-1" oclick = "replacePlayer(this)"><i class="fa-solid fa-rotate w-[8px] h-[8px] md:w-[18px] md:h-[12px]"></i></button>
           </div>
         <div class="player-master-info">
           <div class="player-rating">
@@ -305,143 +309,158 @@ function addPlayerToPosition(players) {
   });
 }
 
-
+  
+//add player to field function
 function addPlayerToField(div, cardId) {
   const Index = playersArray.findIndex((player) => player.id == cardId);
   let player = playersArray[Index];
-
+  console.log(Index)
+  console.log(player.position)
   switch (player.position) {
     case "LW":
-      if (document.getElementById("player-lw").children.length == 0) {
-        document.getElementById("player-lw").innerHTML = div.innerHTML;
+      if (document.getElementById("LW").children.length == 0) {
+        document.getElementById("LW").innerHTML = div.innerHTML;
         div.remove();
-        playersArray.splice(Index, 1);
+        // playersArray.splice(Index, 1);
       }
-      else if(replacementPlayers.filter(player => player.position ==="LW").length < 1 && replacementPlayers.length < 7){
+      else if(replacementPlayers.filter(p => p.position === "LW").length < 1 && replacementPlayers.length < 7){
+          // console.log(true)
+          // replacementPlayers.push(playersArray[Index]);
+          // updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
           replacementPlayers.push(playersArray[Index]);
-          updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+          localStorage.setItem("replacementPlayers",JSON.stringify(replacementPlayers))
           replacementContainer.appendChild(div);
          }
       
       break;
     case "ST":
-      if (document.getElementById("player-st").children.length == 0) {
-        document.getElementById("player-st").innerHTML = div.innerHTML;
+      if (document.getElementById("ST").children.length == 0) {
+        document.getElementById("ST").innerHTML = div.innerHTML;
 
         div.remove();
-        playersArray.splice(Index, 1);
+        // playersArray.splice(Index, 1);
       }
-      else if(replacementPlayers.filter(player => player.position ==="ST").length < 1 && replacementPlayers.length < 7){
+      else if(replacementPlayers.filter(p => p.position ==="ST").length < 1 && replacementPlayers.length < 7){
+        // replacementPlayers.push(playersArray[Index]);
+        // updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
         replacementPlayers.push(playersArray[Index]);
-        updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+          localStorage.setItem("replacementPlayers",JSON.stringify(replacementPlayers))
+          replacementContainer.appendChild(div);
         replacementContainer.appendChild(div);
       }
       break;
     case "RW":
-      if (document.getElementById("player-rw").children.length == 0) {
-        document.getElementById("player-rw").innerHTML = div.innerHTML;
+      if (document.getElementById("RW").children.length == 0) {
+        document.getElementById("RW").innerHTML = div.innerHTML;
         div.remove();
-        playersArray.splice(Index, 1);
+        // playersArray.splice(Index, 1);
       }
-      else if(replacementPlayers.filter(player => player.position ==="RW").length < 1 && replacementPlayers.length < 7){
-        replacementPlayers.push(playersArray[Index]);
-          updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+      else if(replacementPlayers.filter(p => p.position ==="RW").length < 1 && replacementPlayers.length < 7){
+          // replacementPlayers.push(playersArray[Index]);
+          // updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
+          replacementPlayers.push(playersArray[Index]);
+          localStorage.setItem("replacementPlayers",JSON.stringify(replacementPlayers))
+          replacementContainer.appendChild(div);
           replacementContainer.appendChild(div);
       }
       break;
     case "CMG":
-      if (document.getElementById("player-cm-g").children.length == 0) {
-        document.getElementById("player-cm-g").innerHTML = div.innerHTML;
+      if (document.getElementById("CMG").children.length == 0) {
+        document.getElementById("CMG").innerHTML = div.innerHTML;
         div.remove();
-        playersArray.splice(Index, 1);
+        // playersArray.splice(Index, 1);
       } 
-      else if(replacementPlayers.filter(player => player.position ==="CMG").length < 1 && replacementPlayers.length < 7){
+      else if(replacementPlayers.filter(p => p.position === "CMG").length < 1 && replacementPlayers.length < 7){
+        console.log(true)
         replacementPlayers.push(playersArray[Index]);
         updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
         replacementContainer.appendChild(div);
         }
       
       break
-    case "CMC" : if(document.getElementById("player-cm-c").children.length == 0) {
-            document.getElementById("player-cm-c").innerHTML = div.innerHTML;
+    case "CMC" : if(document.getElementById("CMC").children.length == 0) {
+            document.getElementById("CMC").innerHTML = div.innerHTML;
             div.remove();
-            playersArray.splice(Index, 1);
+            // playersArray.splice(Index, 1);
     }
-    else if(replacementPlayers.filter(player => player.position ==="CMC").length < 1 && replacementPlayers.length < 7){
+    else if(replacementPlayers.filter(p => p.position === "CMC").length < 1 && replacementPlayers.length < 7){
       replacementPlayers.push(playersArray[Index]);
       updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
       replacementContainer.appendChild(div);
     }
       break;
-    case "CMD" : if(document.getElementById("player-cm-d").children.length == 0) {
-            document.getElementById("player-cm-d").innerHTML = div.innerHTML;
+    case "CMD" : if(document.getElementById("CMD").children.length == 0) {
+            document.getElementById("CMD").innerHTML = div.innerHTML;
             div.remove();
-            playersArray.splice(Index, 1);
+            // playersArray.splice(Index, 1);
     }
-    else if(replacementPlayers.filter(player => player.position ==="CMD").length < 1 && replacementPlayers.length < 7){
+    else if(replacementPlayers.filter(p => p.position === "CMD").length < 1 && replacementPlayers.length < 7){
       replacementPlayers.push(playersArray[Index]);
       updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
       replacementContainer.appendChild(div);
     }
       break;
     case "LB":
-      if (document.getElementById("player-lb").children.length == 0) {
-        document.getElementById("player-lb").innerHTML = div.innerHTML;
+      if (document.getElementById("LB").children.length == 0) {
+        document.getElementById("LB").innerHTML = div.innerHTML;
         div.remove();
-        playersArray.splice(Index, 1);
+        // playersArray.splice(Index, 1);
       }
-      else if(replacementPlayers.filter(player => player.position ==="LB").length < 1 && replacementPlayers.length < 7){
+      else if(replacementPlayers.filter(p => p.position === "LB").length < 1 && replacementPlayers.length < 7){
         replacementPlayers.push(playersArray[Index]);
         updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
         replacementContainer.appendChild(div);
       }
       break;
     case "CBG":
-      if (document.getElementById("player-cb-g").children.length == 0) {
-        document.getElementById("player-cb-g").innerHTML = div.innerHTML;
+      if (document.getElementById("CBG").children.length == 0) {
+        document.getElementById("CBG").innerHTML = div.innerHTML;
         div.remove();
-        playersArray.splice(Index, 1);
+        // playersArray.splice(Index, 1);
       }
-      else if(replacementPlayers.filter(player => player.position ==="CBG").length < 1 && replacementPlayers.length < 7){
+      else if(replacementPlayers.filter(p => p.position === "CBG").length < 1 && replacementPlayers.length < 7){
         replacementPlayers.push(playersArray[Index]);
         updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
         replacementContainer.appendChild(div);
       }
       break;
-    case "CBD" : if (document.getElementById("player-cb-d").children.length == 0) {
-        document.getElementById("player-cb-d").innerHTML = div.innerHTML;
+    case "CBD" : if (document.getElementById("CBD").children.length == 0) {
+        document.getElementById("CBD").innerHTML = div.innerHTML;
         div.remove();
-        playersArray.splice(Index, 1);
+        // playersArray.splice(Index, 1);
        }
-       else if(replacementPlayers.filter(player => player.position ==="CBG").length < 1 && replacementPlayers.length < 7){
+       else if(replacementPlayers.filter(p => p.position === "CBD").length < 1 && replacementPlayers.length < 7){
         replacementPlayers.push(playersArray[Index]);
         updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
         replacementContainer.appendChild(div);
       }
       break;
     case "RB":
-      if (document.getElementById("player-rb").children.length == 0) {
-        document.getElementById("player-rb").innerHTML = div.innerHTML;
+      if (document.getElementById("RB").children.length == 0) {
+        document.getElementById("RB").innerHTML = div.innerHTML;
         div.remove();
-        playersArray.splice(Index, 1);
+        // playersArray.splice(Index, 1);
       }
-      else if(replacementPlayers.filter(player => player.position ==="RB").length < 1 && replacementPlayers.length < 7){
+      else if(replacementPlayers.filter(p => p.position === "RB").length < 1 && replacementPlayers.length < 7){
         replacementPlayers.push(playersArray[Index]);
         updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
         replacementContainer.appendChild(div);
       }
       break;
     case "GK":
-      if (document.getElementById("player-gk").children.length == 0) {
-        document.getElementById("player-gk").innerHTML = div.innerHTML;
+      if (document.getElementById("GK").children.length == 0) {
+        document.getElementById("GK").innerHTML = div.innerHTML;
         div.remove();
-        playersArray.splice(Index, 1);
+        // playersArray.splice(Index, 1);
       }
-      else if(replacementPlayers.filter(player => player.position ==="GK").length < 1 && replacementPlayers.length < 7){
+      else if(replacementPlayers.filter(p => p.position === "GK").length < 1 && replacementPlayers.length < 7){
         replacementPlayers.push(playersArray[Index]);
         updateLocalStroage("replacementPlayers",replacementPlayers,player,"add");
         replacementContainer.appendChild(div);
       }
+      break;
+
+      default : console.log("default")
       break;
   }
 
@@ -462,6 +481,8 @@ const updatePlayerBtn = document.createElement("button");
 updatePlayerBtn.className = "text-white bg-[#5ce1e6] px-2 py-1 rounded-md mt-2 focus:outline-none focus:border-none";
 updatePlayerBtn.innerText = "Update Player";
 
+
+//edit player function
 var play;
 function editPlayer(element) {
   console.log(element.parentElement.parentElement.parentElement.id);
@@ -473,7 +494,7 @@ function editPlayer(element) {
     addPlayerForm.appendChild(updatePlayerBtn);
 
     for(let i = 0;i < playersArray.length;i++){
-      if (playersArray[i].id == id) {
+      if (playersArray[i].position == id) {
         console.log("true")
         if(playersArray[i].position != "GK"){
           console.log("true")
@@ -568,7 +589,7 @@ function updatePlayerInfo(player){
 }
 
 
-//disponible players
+//display disponible players
 function displayAllPlayers(container,array){
 array.forEach((player) => {
   let resevedPlayer = document.createElement("div");
@@ -746,6 +767,7 @@ function addNewPlayer(){
 
 function updateLocalStroage(arrayKey,array,id,mod){
   let Index = array.findIndex(p => p.id == id)
+  console.log("idi",id)
     console.log("Index",Index)  
   if(mod === "sup"){
     array.splice(Index,1);
@@ -770,9 +792,16 @@ function updateLocalStroage(arrayKey,array,id,mod){
 addPlayerBtn.addEventListener("click",addNewPlayer);
 
 
-function replacePlayer(){
-  displayAllPlayers(replacementContainer,replacementPlayers);
+function replacePlayer(element){
+  let id = element.parentElement.parentElement.parentElement.id;
+  replacementPlayers.forEach(player=>{
+    if(player.id == id){
+      console.log()
+      displayAllPlayers(replacementContainer,replacementPlayers);
+    }
+  })
 }
+
 
 
 displayAllPlayers(disponiblePlayers,playersArray);
